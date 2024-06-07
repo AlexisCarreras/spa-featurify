@@ -1,0 +1,13 @@
+.topBar {
+  box-shadow: none !important;
+}
+
+.searchIcon {
+  color: #0000008a;
+  font-size: 28px !important;
+}
+
+button:focus,
+button:focus-visible {
+  outline: none !important;
+}
