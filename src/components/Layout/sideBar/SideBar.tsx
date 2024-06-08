@@ -1,15 +1,9 @@
-import Box from "@mui/material/Box";
-import Divider from "@mui/material/Divider";
-import Drawer from "@mui/material/Drawer";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
-import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import MailIcon from "@mui/icons-material/Mail";
-import Toolbar from "@mui/material/Toolbar";
+import { Box, Drawer } from "@mui/material";
 import { SideBarProps } from "./type";
+import styles from "./styles.module.css";
+import "./stylesMUI.css";
+
+import { DrawerList } from "../drawer/DrawerList";
 
 export const SideBar: React.FunctionComponent<SideBarProps> = ({
   drawerWidth,
@@ -26,25 +20,6 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
     setIsClosing(false);
   };
 
-  const drawer = (
-    <div>
-      <Toolbar />
-      <Divider />
-      <List>
-        {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
-              </ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
-        ))}
-      </List>
-    </div>
-  );
-
   return (
     <Box
       component="nav"
@@ -52,6 +27,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
       aria-label="mailbox folders"
     >
       <Drawer
+        className={styles.drawer}
         variant="temporary"
         open={mobileOpen}
         onTransitionEnd={handleDrawerTransitionEnd}
@@ -67,9 +43,10 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
           },
         }}
       >
-        {drawer}
+        <DrawerList />
       </Drawer>
       <Drawer
+        className={styles.drawer}
         variant="permanent"
         sx={{
           display: { xs: "none", sm: "block" },
@@ -80,7 +57,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
         }}
         open
       >
-        {drawer}
+        <DrawerList />
       </Drawer>
     </Box>
   );

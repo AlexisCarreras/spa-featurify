@@ -1,0 +1,21 @@
+.listItem {
+  gap: 8px !important;
+  padding: 6px 16px !important;
+}
+
+.listItem:hover {
+  background-color: #4e36f5 !important;
+}
+
+.icon {
+  color: #b3b9c6 !important;
+}
+
+.itemText {
+  color: #b3b9c6 !important;
+  margin: 0 !important;
+  font-family: "Inter" !important;
+  font-size: 0.875rem !important;
+  font-weight: 500 !important;
+  line-height: 28px !important;
+}
