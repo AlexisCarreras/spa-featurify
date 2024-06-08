@@ -1,14 +1,68 @@
+.toolbar {
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+  margin-right: 5rem !important;
+}
+
+.logo {
+  color: #4e36f5 !important;
+}
+
+.containerTextLogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.nameLogo {
+  color: #ffff !important;
+  margin: 0 !important;
+  font-family: "Inter" !important;
+  font-size: 1.1rem !important;
+  font-weight: 700 !important;
+  line-height: 28px !important;
+  margin-left: 12px !important;
+  display: flex;
+  align-items: center;
+}
+
+.descriptionLogo {
+  color: #afafaf !important;
+  margin: 0 !important;
+  font-family: "Inter" !important;
+  font-size: 0.8rem !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+  margin-left: 12px !important;
+  display: flex !important;
+  align-items: start !important;
+}
+
+.list {
+  padding: 16px !important;
+  display: flex !important;
+  flex-direction: column !important;
+  gap: 8px !important;
+}
+
 .listItem {
   gap: 8px !important;
-  padding: 6px 16px !important;
+  padding: 0 !important;
 }
 
 .listItem:hover {
-  background-color: #4e36f5 !important;
+  background-color: rgba(255, 255, 255, 0.04) !important;
+}
+
+.containerIcon {
+  min-width: 35px !important;
+  display: flex !important;
+  justify-content: flex-start !important;
 }
 
 .icon {
-  color: #b3b9c6 !important;
+  color: #8a94a6 !important;
+  width: 1.4rem !important;
 }
 
 .itemText {

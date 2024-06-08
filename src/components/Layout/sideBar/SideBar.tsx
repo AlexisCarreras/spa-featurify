@@ -1,4 +1,4 @@
-import { Box, Drawer } from "@mui/material";
+import { Box, Drawer, Typography } from "@mui/material";
 import { SideBarProps } from "./type";
 import styles from "./styles.module.css";
 import "./stylesMUI.css";
@@ -44,6 +44,9 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
         }}
       >
         <DrawerList />
+        <Typography variant="caption" className={styles.version}>
+          Version 1.0.0
+        </Typography>
       </Drawer>
       <Drawer
         className={styles.drawer}
@@ -58,6 +61,9 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
         open
       >
         <DrawerList />
+        <Typography variant="caption" className={styles.version}>
+          Version 1.0.0
+        </Typography>
       </Drawer>
     </Box>
   );

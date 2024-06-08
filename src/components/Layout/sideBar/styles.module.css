@@ -1,4 +1,13 @@
 .drawer {
-    background-color: #121621 !important;
-    color: white !important;
+  background-color: #121621 !important;
+  color: white !important;
 }
+
+.version {
+  color: #b3b9c6 !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: end !important;
+  margin-top: 36rem !important;
+}
+
