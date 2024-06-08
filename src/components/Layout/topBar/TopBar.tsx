@@ -1,8 +1,9 @@
-import { AppBar, Avatar, Divider, IconButton, Toolbar } from "@mui/material";
+import { AppBar, Divider, IconButton, Toolbar, Tooltip } from "@mui/material";
 import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
 
 import styles from "./styles.module.css";
 import { TopBarProps } from "./type";
+import { AvatarUser } from "../avatar/AvatarUser";
 
 export const TopBar: React.FunctionComponent<TopBarProps> = ({
   handleDrawerToggle,
@@ -28,12 +29,13 @@ export const TopBar: React.FunctionComponent<TopBarProps> = ({
         >
           <MenuIcon />
         </IconButton>
-        <IconButton edge="start">
-          <SearchIcon className={styles.searchIcon} />
-        </IconButton>
-        <IconButton edge="end">
-          <Avatar src="/broken-image.jpg" />
-        </IconButton>
+        <Tooltip title="Buscar Track">
+          <IconButton edge="start">
+            <SearchIcon className={styles.searchIcon} />
+          </IconButton>
+        </Tooltip>
+
+        <AvatarUser />
       </Toolbar>
       <Divider />
     </AppBar>

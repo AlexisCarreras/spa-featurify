@@ -1,0 +1,34 @@
+.divider {
+  margin-bottom: 8px !important;
+}
+
+.itemIcon {
+  margin: 8px !important;
+  border-radius: 8px !important;
+  font-family: "Inter" !important;
+  font-size: 1rem !important;
+  color: #212636 !important;
+}
+
+.itemIconProfile:hover {
+  margin: 8px;
+}
+
+.containerDataUser {
+  padding: 16px 20px;
+}
+
+.nameUser {
+  font-family: "Inter" !important;
+  color: #212636 !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  line-height: 1.57 !important;
+}
+
+.emailUser {
+  color: #667085 !important;
+  line-height: 21.98px !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+}
