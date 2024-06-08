@@ -2,13 +2,13 @@ import * as React from "react";
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
 import { TopBar } from "../../components/Layout/topBar/TopBar";
 import { SideBar } from "../../components/Layout/sideBar/SideBar";
+import { MainLayoutProps } from "./type";
 
 const drawerWidth = 280;
 
-export const MainLayout = () => {
+export const MainLayout: React.FunctionComponent<MainLayoutProps> = ({ children }) => {
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [isClosing, setIsClosing] = React.useState(false);
 
@@ -43,9 +43,7 @@ export const MainLayout = () => {
       >
         <Toolbar />
 
-        <Typography paragraph>
-          Pruebas de nuevo MainLayout
-        </Typography>
+        {children}
       </Box>
     </Box>
   );

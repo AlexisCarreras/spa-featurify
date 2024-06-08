@@ -47,11 +47,23 @@
 
 .listItem {
   gap: 8px !important;
-  padding: 0 !important;
+  padding: 6px 16px !important;
 }
 
 .listItem:hover {
   background-color: rgba(255, 255, 255, 0.04) !important;
+  color: #ffff !important;
+  border-radius: 8px !important;
+  padding: 6px 16px !important;
+}
+
+.listItemActive {
+  background-color: #635bff !important;
+  color: #ffff !important;
+  border-radius: 8px !important;
+  gap: 8px !important;
+  padding: 2px 16px !important;
+  color: #ffff !important;
 }
 
 .containerIcon {
@@ -65,6 +77,10 @@
   width: 1.4rem !important;
 }
 
+.iconActive {
+  color: #ffff !important;
+}
+
 .itemText {
   color: #b3b9c6 !important;
   margin: 0 !important;
@@ -72,4 +88,12 @@
   font-size: 0.875rem !important;
   font-weight: 500 !important;
   line-height: 28px !important;
+}
+
+.itemTextActive {
+  color: #ffff !important;
+}
+
+.itemText:hover {
+  color: #ffff !important;
 }
