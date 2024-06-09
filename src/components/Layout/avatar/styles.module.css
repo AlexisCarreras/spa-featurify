@@ -5,7 +5,7 @@
 .itemIcon {
   margin: 8px !important;
   border-radius: 8px !important;
-  font-family: "Inter" !important;
+  font-family: Inter !important;
   font-size: 1rem !important;
   color: #212636 !important;
 }
@@ -19,7 +19,7 @@
 }
 
 .nameUser {
-  font-family: "Inter" !important;
+  font-family: Inter !important;
   color: #212636 !important;
   font-size: 1rem !important;
   font-weight: 500 !important;

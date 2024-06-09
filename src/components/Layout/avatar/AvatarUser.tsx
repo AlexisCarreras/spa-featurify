@@ -40,7 +40,7 @@ export const AvatarUser = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar src="/broken-image.jpg" />
+            <Avatar src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/441398891_10225283301693785_1703430363880467182_n.jpg?stp=dst-jpg_s320x320&_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LD_Z1XoihwwQ7kNvgGOtC8Q&_nc_ht=scontent-iad3-2.xx&edm=AP4hL3IEAAAA&oh=00_AYB6HhDwzG-lrEx9dn4KsdyfsSSR4bKnGsH0_lhkYa7vww&oe=666A3E85" />
           </IconButton>
         </Tooltip>
       </Box>

@@ -1,7 +1,6 @@
 .toolbar {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-  margin-right: 5rem !important;
 }
 
 .logo {
@@ -17,19 +16,21 @@
 .nameLogo {
   color: #ffff !important;
   margin: 0 !important;
-  font-family: "Inter" !important;
+  font-family: Inter !important;
   font-size: 1.1rem !important;
   font-weight: 700 !important;
   line-height: 28px !important;
   margin-left: 12px !important;
   display: flex;
   align-items: center;
+  user-select: none;
 }
 
 .descriptionLogo {
+  user-select: none;
   color: #afafaf !important;
   margin: 0 !important;
-  font-family: "Inter" !important;
+  font-family: Inter !important;
   font-size: 0.8rem !important;
   font-weight: 400 !important;
   line-height: 28px !important;
@@ -47,14 +48,14 @@
 
 .listItem {
   gap: 8px !important;
-  padding: 6px 16px !important;
+  padding: 4px 16px !important;
 }
 
 .listItem:hover {
   background-color: rgba(255, 255, 255, 0.04) !important;
   color: #ffff !important;
   border-radius: 8px !important;
-  padding: 6px 16px !important;
+  padding: 4px 16px !important;
 }
 
 .listItemActive {
@@ -62,7 +63,7 @@
   color: #ffff !important;
   border-radius: 8px !important;
   gap: 8px !important;
-  padding: 2px 16px !important;
+  padding: 0px 16px !important;
   color: #ffff !important;
 }
 
@@ -84,7 +85,7 @@
 .itemText {
   color: #b3b9c6 !important;
   margin: 0 !important;
-  font-family: "Inter" !important;
+  font-family: Inter !important;
   font-size: 0.875rem !important;
   font-weight: 500 !important;
   line-height: 28px !important;
