@@ -4,8 +4,11 @@ import { TableSearch } from "../../../components/dashboard/search/table/TableSea
 
 import style from "./style.module.css";
 import "./stylesMUI.css";
+import { useState } from "react";
 
 export const Search = () => {
+  const [showTable, setShowTable] = useState(false);
+
   const features = [
     "Danceability",
     "Energy",
@@ -36,8 +39,8 @@ export const Search = () => {
           ))}
         </Stack>
       </Stack>
-      <SearchFilter />
-      <TableSearch />
+      <SearchFilter showTable={showTable} setShowTable={setShowTable} />
+      {showTable && <TableSearch />}
     </Stack>
   );
 };

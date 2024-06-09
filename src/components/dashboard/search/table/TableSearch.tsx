@@ -1,8 +1,12 @@
+import { useState } from "react";
 import {
   Avatar,
   Box,
   Button,
   Card,
+  IconButton,
+  Slide,
+  Snackbar,
   Stack,
   Table,
   TableBody,
@@ -10,14 +14,19 @@ import {
   TableHead,
   TablePagination,
   TableRow,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import { Favorite, FavoriteBorder, Leaderboard } from "@mui/icons-material";
 
 import style from "./style.module.css";
 
-export const TableSearch = () => {
-  const tracks = [
+const TransitionSlide = (props: any) => {
+  return <Slide {...props} direction="left" />;
+};
+
+export const TableSearch: React.FunctionComponent = () => {
+  const [tracks, setTracks] = useState([
     {
       _id: "665f774dcdd401184e927479",
       isFavorite: true,
@@ -174,7 +183,37 @@ export const TableSearch = () => {
       nameTrack: "FRESCO",
       __v: 0,
     },
-  ];
+  ]);
+
+  const [snackBar, setSnackBar] = useState({
+    open: false,
+    text: "",
+  });
+
+  const toggleFavorite = (trackId: string) => {
+    setTracks((prevTracks) =>
+      prevTracks.map((track) =>
+        track._id === trackId
+          ? { ...track, isFavorite: !track.isFavorite }
+          : track
+      )
+    );
+
+    const track = tracks.find((track) => track._id === trackId);
+    const action = track?.isFavorite ? "quitado de" : "añadido a";
+
+    setSnackBar({
+      open: true,
+      text: `Track ${action} favoritos`,
+    });
+  };
+
+  const handleCloseSnackBar = () => {
+    setSnackBar({
+      ...snackBar,
+      open: false,
+    });
+  };
 
   function noop(): void {
     // do nothing
@@ -196,7 +235,9 @@ export const TableSearch = () => {
             <TableRow>
               {dataTable.map((item: string) => {
                 return (
-                  <TableCell className={style.tableCell}>{item}</TableCell>
+                  <TableCell className={style.tableCellHeader}>
+                    {item}
+                  </TableCell>
                 );
               })}
             </TableRow>
@@ -212,23 +253,46 @@ export const TableSearch = () => {
                       spacing={2}
                     >
                       <Avatar src={track.album.images[0].url} />
-                      <Typography variant="subtitle2">
+                      <Typography
+                        variant="subtitle2"
+                        className={style.tableCellDataPrimary}
+                      >
                         {track.nameTrack}
                       </Typography>
                     </Stack>
                   </TableCell>
-                  <TableCell>{track.artist[0].nameArtist}</TableCell>
-                  <TableCell>{track.album.nameAlbum}</TableCell>
+                  <TableCell className={style.tableCellDataSecondary}>
+                    {track.artist[0].nameArtist}
+                  </TableCell>
+                  <TableCell className={style.tableCellDataSecondary}>
+                    {track.album.nameAlbum}
+                  </TableCell>
                   <TableCell>
-                    {track.isFavorite ? (
-                      <Favorite className={style.icon} />
-                    ) : (
-                      <FavoriteBorder className={style.icon} />
-                    )}
+                    <IconButton
+                      color="primary"
+                      aria-label="add to shopping cart"
+                      onClick={() => toggleFavorite(track._id)}
+                    >
+                      {track.isFavorite ? (
+                        <Tooltip
+                          title="Quitar de Favoritos"
+                          placement="left-start"
+                        >
+                          <Favorite className={style.icon} />
+                        </Tooltip>
+                      ) : (
+                        <Tooltip
+                          title="Añadir a Favoritos"
+                          placement="left-start"
+                        >
+                          <FavoriteBorder className={style.icon} />
+                        </Tooltip>
+                      )}
+                    </IconButton>
                   </TableCell>
                   <TableCell>
                     <Button
-                      variant="contained"
+                      variant="outlined"
                       startIcon={<Leaderboard />}
                       className={style.button}
                     >
@@ -240,6 +304,14 @@ export const TableSearch = () => {
             })}
           </TableBody>
         </Table>
+        <Snackbar
+          open={snackBar.open}
+          autoHideDuration={2000}
+          onClose={handleCloseSnackBar}
+          message={snackBar.text}
+          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          TransitionComponent={TransitionSlide}
+        />
       </Box>
       <TablePagination
         component="div"

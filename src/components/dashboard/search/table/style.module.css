@@ -9,7 +9,7 @@
   background-color: #f9fafb !important;
 }
 
-.tableCell {
+.tableCellHeader {
   font-weight: 500 !important;
   font-size: 0.875rem !important;
   color: #667085 !important;
@@ -17,22 +17,33 @@
   line-height: 1 !important;
 }
 
+.tableCellDataPrimary {
+  font-family: Inter !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.57 !important;
+}
+
+.tableCellDataSecondary {
+  font-family: Inter !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.57 !important;
+  color: #212636 !important;
+}
+
 .icon {
   color: #4e36f5;
 }
 
 .button {
-  background-color: #635bff !important;
+  border: #635bff 1px solid !important;
+  color: #635bff !important;
   text-transform: none !important;
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08) !important;
   border-radius: 12px !important;
   padding: 8px 20px !important;
   font-family: Inter !important;
-  font-weight: 500 !important;
   font-size: 0.875rem !important;
-  line-height: 1.75 !important;
-}
-
-.button:hover {
-  background-color: #4e36f5 !important;
+  line-height: 1 !important;
 }

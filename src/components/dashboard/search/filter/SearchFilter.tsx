@@ -1,9 +1,12 @@
-import { Card, InputAdornment, OutlinedInput } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
-
+import { Button, Card, InputAdornment, OutlinedInput } from "@mui/material";
+import { Search, Send } from "@mui/icons-material";
 import style from "./style.module.css";
+import { SearchFilterProps } from "./type";
 
-export const SearchFilter = () => {
+export const SearchFilter: React.FunctionComponent<SearchFilterProps> = ({
+  showTable,
+  setShowTable,
+}) => {
   return (
     <Card className={style.card} sx={{ p: 2 }}>
       <OutlinedInput
@@ -12,7 +15,7 @@ export const SearchFilter = () => {
         placeholder="Nombre del Track"
         startAdornment={
           <InputAdornment position="start">
-            <SearchIcon />
+            <Search />
           </InputAdornment>
         }
         sx={{
@@ -22,6 +25,14 @@ export const SearchFilter = () => {
           },
         }}
       />
+      <Button
+        onClick={() => setShowTable(!showTable)}
+        className={style.button}
+        variant="contained"
+        endIcon={<Send />}
+      >
+        Buscar
+      </Button>
     </Card>
   );
 };
