@@ -1,0 +1,38 @@
+@media (min-width: 1440px) {
+  .searchContainer {
+    max-width: 1440px;
+  }
+}
+
+@media (min-width: 600px) {
+  .searchContainer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+.searchContainer {
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding: 45px 16px;
+}
+
+.title {
+  margin: 0px !important;
+  font-family: Inter !important;
+  font-weight: 500 !important;
+  font-size: 2rem !important;
+  line-height: 1.2 !important;
+}
+
+.subtitle {
+  margin: 0px !important;
+  font-family: Inter !important;
+  font-weight: 300 !important;
+  font-size: 0.8rem !important;
+  line-height: 1.2 !important;
+  margin-top: 0.5rem !important;
+}

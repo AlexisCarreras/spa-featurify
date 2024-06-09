@@ -1,10 +1,10 @@
+import { useState } from "react";
 import { Chip, Stack, Typography } from "@mui/material";
 import { SearchFilter } from "../../../components/dashboard/search/filter/SearchFilter";
 import { TableSearch } from "../../../components/dashboard/search/table/TableSearch";
 
 import style from "./style.module.css";
 import "./stylesMUI.css";
-import { useState } from "react";
 
 export const Search = () => {
   const [showTable, setShowTable] = useState(false);
