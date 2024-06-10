@@ -18,25 +18,17 @@ import {
   Typography,
 } from "@mui/material";
 import { Favorite, FavoriteBorder, Leaderboard } from "@mui/icons-material";
+
 import style from "./style.module.css";
-import { dataSearch } from "../mock/dataSearch";
-import { DataSearch, Track } from "../type";
-import { useformatDuration } from "../../../../hooks/useFormatDuration";
+import { dataFavorites } from "../mock/dataFavorites";
+import { DataFavorites, Track } from "../type";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
 };
 
-export const TableSearch: React.FunctionComponent = () => {
-  const initialTracks = {
-    ...dataSearch,
-    items: dataSearch.items.map((track) => ({
-      ...track,
-      isFavorite: track.isFavorite ?? false,
-    })),
-  };
-
-  const [tracks, setTracks] = useState<DataSearch>(initialTracks);
+export const TableFavorites: React.FunctionComponent = () => {
+  const [tracks, setTracks] = useState<DataFavorites>(dataFavorites);
 
   const [snackBar, setSnackBar] = useState({
     open: false,
@@ -44,16 +36,15 @@ export const TableSearch: React.FunctionComponent = () => {
   });
 
   const toggleFavorite = (trackId: string) => {
-    setTracks((prevTracks) => ({
-      ...prevTracks,
-      items: prevTracks.items.map((track) =>
+    setTracks((prevTracks) =>
+      prevTracks.map((track) =>
         track.idTrack === trackId
           ? { ...track, isFavorite: !track.isFavorite }
           : track
-      ),
-    }));
+      )
+    );
 
-    const track = tracks.items.find((track) => track.idTrack === trackId);
+    const track = tracks.find((track) => track.idTrack === trackId);
     const action = track?.isFavorite ? "quitado de" : "añadido a";
 
     setSnackBar({
@@ -77,7 +68,6 @@ export const TableSearch: React.FunctionComponent = () => {
     "Track",
     "Artista",
     "Album",
-    "Duración",
     "Favorito",
     "Obtener Análisis",
   ];
@@ -88,7 +78,7 @@ export const TableSearch: React.FunctionComponent = () => {
         <Table sx={{ minWidth: "800px" }}>
           <TableHead className={style.tableHead}>
             <TableRow>
-              {dataTable.map((item: string, index: number) => (
+              {dataTable.map((item: string, index) => (
                 <TableCell key={index} className={style.tableCellHeader}>
                   {item}
                 </TableCell>
@@ -96,8 +86,8 @@ export const TableSearch: React.FunctionComponent = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tracks.items.map((track: Track, index: number) => (
-              <TableRow key={index} hover>
+            {tracks.map((track: Track) => (
+              <TableRow key={track._id} hover>
                 <TableCell>
                   <Stack
                     sx={{ alignItems: "center" }}
@@ -114,13 +104,10 @@ export const TableSearch: React.FunctionComponent = () => {
                   </Stack>
                 </TableCell>
                 <TableCell className={style.tableCellDataSecondary}>
-                  {track.artist[0].nameArtist}
+                  {track.artist.map((artist) => artist.nameArtist).join(", ")}
                 </TableCell>
                 <TableCell className={style.tableCellDataSecondary}>
                   {track.album.nameAlbum}
-                </TableCell>
-                <TableCell className={style.tableCellDataSecondary}>
-                  {useformatDuration(track.durationMs)}
                 </TableCell>
                 <TableCell>
                   <IconButton
@@ -169,7 +156,7 @@ export const TableSearch: React.FunctionComponent = () => {
       </Box>
       <TablePagination
         component="div"
-        count={tracks.items.length}
+        count={tracks.length}
         onPageChange={noop}
         onRowsPerPageChange={noop}
         page={0}
