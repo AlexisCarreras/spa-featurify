@@ -1,0 +1,27 @@
+.css-46bh2p-MuiCardContent-root {
+  padding: 32px 24px 0px !important;
+}
+
+/* Estilos para el title de la card */
+.css-1qvr50w-MuiTypography-root {
+  margin: 0 !important;
+  font-family: Inter !important;
+  font-weight: 500 !important;
+  font-size: 1.125rem !important;
+  line-height: 1.2 !important;
+}
+
+/* Estilos para el texto */
+.css-nrdprl-MuiTypography-root {
+  margin: 0 !important;
+  font-family: Inter !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.57 !important;
+  color: #667085 !important;
+}
+
+/* Estilos para el label */
+.css-ot9bza-MuiFormLabel-root-MuiInputLabel-root {
+  font-family: Inter !important;
+}

@@ -15,6 +15,7 @@ import { Logout, Person } from "@mui/icons-material";
 import styles from "./styles.module.css";
 
 import "./stylesMUI.css";
+import { Link } from "react-router-dom";
 
 export const AvatarUser = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
@@ -63,12 +64,17 @@ export const AvatarUser = () => {
           </Typography>
         </div>
         <Divider className={styles.divider} />
-        <MenuItem className={styles.itemIcon} onClick={handleClose}>
-          <ListItemIcon>
-            <Person fontSize="small" />
-          </ListItemIcon>
-          Perfil
-        </MenuItem>
+        <Link to="/account">
+          <MenuItem
+            className={styles.itemIcon}
+            onClick={handleClose}
+          >
+            <ListItemIcon>
+              <Person fontSize="small" />
+            </ListItemIcon>
+            Perfil
+          </MenuItem>
+        </Link>
         <MenuItem className={styles.itemIcon} onClick={handleClose}>
           <ListItemIcon>
             <Logout fontSize="small" />
