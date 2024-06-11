@@ -76,40 +76,6 @@ export const dataRecomendationsPreview: DataRecomendationsPreview = {
     },
     {
       album: {
-        idAlbum: "7ygXmT175bKbOpiPjNwXOB",
-        nameAlbum: "H2O",
-        images: [
-          {
-            url: "https://i.scdn.co/image/ab67616d0000b273cfe4163cbb6d12f3ec15898e",
-            height: 640,
-            width: 640,
-          },
-          {
-            url: "https://i.scdn.co/image/ab67616d00001e02cfe4163cbb6d12f3ec15898e",
-            height: 300,
-            width: 300,
-          },
-          {
-            url: "https://i.scdn.co/image/ab67616d00004851cfe4163cbb6d12f3ec15898e",
-            height: 64,
-            width: 64,
-          },
-        ],
-      },
-      artists: [
-        {
-          idArtist: "77tT1kLj6mCWtFNqiOmP9H",
-          nameArtist: "Daryl Hall & John Oates",
-        },
-      ],
-      idTrack: "7j74lucZ59vqN67Ipe2ZcY",
-      nameTrack: "Maneater",
-      duration_ms: 273173,
-      explicit: false,
-      type: "track",
-    },
-    {
-      album: {
         idAlbum: "43zbrwwFHh5e7cmDQomx8Z",
         nameAlbum: "Road to Ruin (40th Anniversary Deluxe Edition)",
         images: [

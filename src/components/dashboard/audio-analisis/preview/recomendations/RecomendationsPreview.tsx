@@ -68,7 +68,13 @@ export const RecomendationsPreview: React.FunctionComponent = () => {
                     <img
                       src={track.album.images[2].url}
                       alt={track.album.nameAlbum}
-                      style={{ width: 30, height: 30, borderRadius: "100%" }}
+                      style={{
+                        width: 45,
+                        height: 45,
+                        borderRadius: "100%",
+                        boxShadow:
+                          "0px 5px 22px 0px rgba(0, 0, 0, 0.1), inset 0px 0px 0px 1px rgba(0, 0, 0, 0.1)",
+                      }}
                     />
                   </TableCell>
                   <TableCell>
