@@ -6,9 +6,10 @@ import style from "./style.module.css";
 import "./stylesMUI.css";
 import { RecomendationsPreview } from "../../../components/dashboard/audio-analisis/preview/recomendations/RecomendationsPreview";
 import { AlbumDetails } from "../../../components/dashboard/audio-analisis/album-details/AlbumDetails";
+import { TrackAnalysis } from "../../../components/dashboard/audio-analisis/track-analysis/TrackAnalysis";
 
 export const AudioAnalisis: React.FunctionComponent = () => {
-  return (
+    return (
     <Stack className={style.searchContainer} spacing={3}>
       <Grid container spacing={3}>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
@@ -28,7 +29,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           <CardDetails title="Compás" description="4/4" typeIcon="compas" />
         </Grid>
         <Grid lg={8} xs={12} className={style.gridCardBarFeatures}>
-          Barras de Features
+          <TrackAnalysis />
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardAlbumDetails}>
           <AlbumDetails />
