@@ -33,7 +33,6 @@ export function useChartOptions() {
       categories: [
         "Danceability",
         "Energy",
-        "Loudness",
         "Speechiness",
         "Acousticness",
         "Instrumentalness",

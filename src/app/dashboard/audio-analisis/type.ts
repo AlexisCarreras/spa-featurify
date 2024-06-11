@@ -14,7 +14,3 @@ export interface DataTrackFeature {
   durationMs: number;
   timeSignature: number;
 }
-
-export interface TrackAnalysisProp {
-  dataTrackFeature: DataTrackFeature;
-}

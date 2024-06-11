@@ -10,12 +10,22 @@ import {
 
 import { Chart } from "./chart/Chart";
 import { useChartOptions } from "./chart/useChartOptions";
-import { dataTrackFeature } from "./mock/dataTrackFeature";
 
 import style from "./style.module.css";
 import { ModalFeatures } from "./ModalFeatures";
+import { TrackAnalysisProp } from "../type";
 
-export const TrackAnalysis: React.FunctionComponent = () => {
+export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
+  dataTrackFeature: {
+    danceability,
+    energy,
+    speechiness,
+    acousticness,
+    instrumentalness,
+    liveness,
+    valence,
+  },
+}) => {
   const chartOptions = useChartOptions();
 
   const [open, setOpen] = useState(false);
@@ -32,14 +42,13 @@ export const TrackAnalysis: React.FunctionComponent = () => {
     {
       name: "Feature",
       data: [
-        dataTrackFeature.danceability,
-        dataTrackFeature.energy,
-        dataTrackFeature.loudness,
-        dataTrackFeature.speechiness,
-        dataTrackFeature.acousticness,
-        dataTrackFeature.instrumentalness,
-        dataTrackFeature.liveness,
-        dataTrackFeature.valence,
+        danceability,
+        energy,
+        speechiness,
+        acousticness,
+        instrumentalness,
+        liveness,
+        valence,
       ],
     },
   ];

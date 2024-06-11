@@ -1,4 +1,4 @@
-import { DataTrackFeature } from "../../type";
+import { DataTrackFeature } from "../type";
 
 export const dataTrackFeature: DataTrackFeature = {
   idTrack: "0ljyHIWERJQp8O5LKgKm1l",
@@ -14,5 +14,5 @@ export const dataTrackFeature: DataTrackFeature = {
   valence: 0.443,
   tempo: 134.597,
   durationMs: 264838,
-  timeSignature: 4,
+  timeSignature: 4
 };

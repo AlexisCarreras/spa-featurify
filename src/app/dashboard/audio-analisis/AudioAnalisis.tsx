@@ -7,29 +7,40 @@ import "./stylesMUI.css";
 import { RecomendationsPreview } from "../../../components/dashboard/audio-analisis/preview/recomendations/RecomendationsPreview";
 import { AlbumDetails } from "../../../components/dashboard/audio-analisis/album-details/AlbumDetails";
 import { TrackAnalysis } from "../../../components/dashboard/audio-analisis/track-analysis/TrackAnalysis";
+import { dataTrackFeature } from "./mock/dataTrackFeature";
+import { TrackName } from "../../../components/dashboard/audio-analisis/card/TrackName/TrackName";
+import { TrackFeature } from "../../../components/dashboard/audio-analisis/card/TrackFeature/TrackFeature";
+import { TrackAddFavorites } from "../../../components/dashboard/audio-analisis/card/TrackFavorites/TrackAddFavorites";
 
 export const AudioAnalisis: React.FunctionComponent = () => {
-    return (
+  const { durationMs, loudness, tempo, timeSignature, key, mode } =
+    dataTrackFeature;
+
+  return (
     <Stack className={style.searchContainer} spacing={3}>
       <Grid container spacing={3}>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
-          <CardDetails
-            title="La Razón Que Te Demora"
-            description="4:50"
-            typeIcon="track"
+          <TrackName
+            durationMs={durationMs}
+            loudness={loudness}
           />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
-          <CardDetails title="Tempo" description="126 BPM" typeIcon="tempo" />
+          <TrackFeature
+            tempo={tempo}
+            timeSignature={timeSignature}
+            typeNote={key}
+            mode={mode}
+          />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
-          <CardDetails title="Nota" description="Sol M" typeIcon="nota" />
+          <TrackAddFavorites />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
           <CardDetails title="Compás" description="4/4" typeIcon="compas" />
         </Grid>
         <Grid lg={8} xs={12} className={style.gridCardBarFeatures}>
-          <TrackAnalysis />
+          <TrackAnalysis dataTrackFeature={dataTrackFeature} />
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardAlbumDetails}>
           <AlbumDetails />
