@@ -3,6 +3,7 @@ import { AudioAnalisis } from "../dashboard/audio-analisis/AudioAnalisis";
 import { Favorites } from "../dashboard/favorites/Favorites";
 import { Recomendations } from "../dashboard/recomendations/Recomendations";
 import { Search } from "../dashboard/search/Search";
+import { PageNotFound } from "../error/PageNotFound";
 import { MainLayout } from "../layout/MainLayout";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
@@ -48,6 +49,10 @@ export const AppRouter = () => {
           <Account />
         </MainLayout>
       ),
+    },
+    {
+      path: "*",
+      element: <PageNotFound />,
     },
   ]);
 
