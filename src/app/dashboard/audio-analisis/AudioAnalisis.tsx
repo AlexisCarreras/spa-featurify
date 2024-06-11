@@ -5,6 +5,7 @@ import { FavoritesPreview } from "../../../components/dashboard/audio-analisis/p
 import style from "./style.module.css";
 import "./stylesMUI.css";
 import { RecomendationsPreview } from "../../../components/dashboard/audio-analisis/preview/recomendations/RecomendationsPreview";
+import { AlbumDetails } from "../../../components/dashboard/audio-analisis/album-details/AlbumDetails";
 
 export const AudioAnalisis: React.FunctionComponent = () => {
   return (
@@ -29,8 +30,8 @@ export const AudioAnalisis: React.FunctionComponent = () => {
         <Grid lg={8} xs={12} className={style.gridCardBarFeatures}>
           Barras de Features
         </Grid>
-        <Grid lg={4} md={6} xs={12} className={style.gridCardAlbumDetails}> 
-          Datos de Album
+        <Grid lg={4} md={6} xs={12} className={style.gridCardAlbumDetails}>
+          <AlbumDetails />
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardFavorites}>
           <FavoritesPreview />
