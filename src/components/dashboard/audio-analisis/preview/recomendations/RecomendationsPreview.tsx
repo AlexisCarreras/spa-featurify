@@ -5,6 +5,7 @@ import {
   CardActions,
   CardHeader,
   Divider,
+  IconButton,
   Table,
   TableBody,
   TableCell,
@@ -12,7 +13,8 @@ import {
   TableRow,
   Tooltip,
 } from "@mui/material";
-import { ArrowForward } from "@mui/icons-material";
+import { ArrowForward, KeyboardArrowRight } from "@mui/icons-material";
+
 import { Link } from "react-router-dom";
 
 import style from "./style.module.css";
@@ -38,8 +40,9 @@ export const RecomendationsPreview: React.FunctionComponent = () => {
               ></TableCell>
               <TableCell>Track</TableCell>
               <TableCell>Artista</TableCell>
+              <TableCell>Album</TableCell>
               <TableCell className={style.tableCellRightRecomendations}>
-                Album
+                Acciones
               </TableCell>
             </TableRow>
           </TableHead>
@@ -65,7 +68,7 @@ export const RecomendationsPreview: React.FunctionComponent = () => {
                     <img
                       src={track.album.images[2].url}
                       alt={track.album.nameAlbum}
-                      style={{ width: 30, height: 30, borderRadius: "100" }}
+                      style={{ width: 30, height: 30, borderRadius: "100%" }}
                     />
                   </TableCell>
                   <TableCell>
@@ -94,6 +97,16 @@ export const RecomendationsPreview: React.FunctionComponent = () => {
                     ) : (
                       <span>{albumName}</span>
                     )}
+                  </TableCell>
+                  <TableCell>
+                    <Tooltip
+                      title="Ver Análisis del Track"
+                      placement="left-start"
+                    >
+                      <IconButton edge="end">
+                        <KeyboardArrowRight />
+                      </IconButton>
+                    </Tooltip>
                   </TableCell>
                 </TableRow>
               );
