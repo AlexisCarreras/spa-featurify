@@ -1,5 +1,4 @@
 import { Grid, Stack } from "@mui/material";
-import { CardDetails } from "../../../components/dashboard/audio-analisis/card/CardDetails";
 import { FavoritesPreview } from "../../../components/dashboard/audio-analisis/preview/favorites/FavoritesPreview";
 
 import style from "./style.module.css";
@@ -11,6 +10,7 @@ import { dataTrackFeature } from "./mock/dataTrackFeature";
 import { TrackName } from "../../../components/dashboard/audio-analisis/card/TrackName/TrackName";
 import { TrackFeature } from "../../../components/dashboard/audio-analisis/card/TrackFeature/TrackFeature";
 import { TrackAddFavorites } from "../../../components/dashboard/audio-analisis/card/TrackFavorites/TrackAddFavorites";
+import { TrackPreview } from "../../../components/dashboard/audio-analisis/card/TrackPreview/TrackPreview";
 
 export const AudioAnalisis: React.FunctionComponent = () => {
   const { durationMs, loudness, tempo, timeSignature, key, mode } =
@@ -20,10 +20,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
     <Stack className={style.searchContainer} spacing={3}>
       <Grid container spacing={3}>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
-          <TrackName
-            durationMs={durationMs}
-            loudness={loudness}
-          />
+          <TrackName durationMs={durationMs} loudness={loudness} />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
           <TrackFeature
@@ -37,7 +34,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           <TrackAddFavorites />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
-          <CardDetails title="Compás" description="4/4" typeIcon="compas" />
+          <TrackPreview url="https://p.scdn.co/mp3-preview/4e165954262eec8ac03d4a5c17f15a0f1bac808d?cid=c0da54e4db61472d91c890564e176f07" />
         </Grid>
         <Grid lg={8} xs={12} className={style.gridCardBarFeatures}>
           <TrackAnalysis dataTrackFeature={dataTrackFeature} />

@@ -3,7 +3,7 @@
     inset 0px 0px 0px 1px rgba(0, 0, 0, 0.06) !important;
   border-radius: 20px !important;
   padding-bottom: 0px !important;
-  padding-top: 32px !important;
+  padding-top: 0px !important;
 }
 
 .title {
@@ -21,6 +21,16 @@
   margin: 0px !important;
   font-family: Inter !important;
   font-weight: 500 !important;
-  font-size: 1.2rem !important;
+  font-size: 1rem !important;
   line-height: 1.2 !important;
+}
+
+.audioPlayerCard {
+  max-width: 600px;
+  margin: 20px auto;
+}
+
+.audioPlayerTitle {
+  text-align: center;
+  margin-bottom: 10px;
 }

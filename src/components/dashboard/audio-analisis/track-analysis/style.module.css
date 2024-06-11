@@ -2,10 +2,12 @@
   box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.04),
     inset 0px 0px 0px 1px rgba(0, 0, 0, 0.06) !important;
   border-radius: 20px !important;
+  padding-bottom: 0px !important;
+  /* margin-top: 32px !important; */
 }
 
 .divider {
-  margin-top: 32px !important;
+  margin-top: 45px !important;
 }
 
 .dialogTitle {
@@ -48,4 +50,6 @@
   padding: 7px 12px !important;
   text-transform: none !important;
   color: #212636 !important;
+  margin-top: 0.5rem  !important;
+  margin-bottom: 0.5rem  !important;
 }
