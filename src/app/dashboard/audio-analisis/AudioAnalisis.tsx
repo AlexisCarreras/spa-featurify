@@ -1,5 +1,44 @@
-export const AudioAnalisis = () => {
+import { Grid, Stack } from "@mui/material";
+import { CardDetails } from "../../../components/dashboard/audio-analisis/card/CardDetails";
+import { FavoritesPreview } from "../../../components/dashboard/audio-analisis/preview/favorites/FavoritesPreview";
+
+import style from "./style.module.css";
+import "./stylesMUI.css";
+import { RecomendationsPreview } from "../../../components/dashboard/audio-analisis/preview/recomendations/RecomendationsPreview";
+
+export const AudioAnalisis: React.FunctionComponent = () => {
   return (
-    <div>AudioAnalisis</div>
-  )
-}
+    <Stack className={style.searchContainer} spacing={3}>
+      <Grid container spacing={3}>
+        <Grid lg={3} sm={6} xs={12} className={style.gridCard}>
+          <CardDetails
+            title="La Razón Que Te Demora"
+            description="4:50"
+            typeIcon="track"
+          />
+        </Grid>
+        <Grid lg={3} sm={6} xs={12} className={style.gridCard}>
+          <CardDetails title="Tempo" description="126 BPM" typeIcon="tempo" />
+        </Grid>
+        <Grid lg={3} sm={6} xs={12} className={style.gridCard}>
+          <CardDetails title="Nota" description="Sol M" typeIcon="nota" />
+        </Grid>
+        <Grid lg={3} sm={6} xs={12} className={style.gridCard}>
+          <CardDetails title="Compás" description="4/4" typeIcon="compas" />
+        </Grid>
+        <Grid lg={8} xs={12}>
+          Barras de Features
+        </Grid>
+        <Grid lg={4} md={6} xs={12}>
+          Datos de Album
+        </Grid>
+        <Grid lg={4} md={6} xs={12}>
+          <FavoritesPreview />
+        </Grid>
+        <Grid lg={8} md={12} xs={12}>
+          <RecomendationsPreview />
+        </Grid>
+      </Grid>
+    </Stack>
+  );
+};

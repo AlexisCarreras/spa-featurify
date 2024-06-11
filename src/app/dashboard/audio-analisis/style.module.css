@@ -1,0 +1,26 @@
+@media (min-width: 1440px) {
+  .searchContainer {
+    max-width: 1440px;
+  }
+}
+
+@media (min-width: 600px) {
+  .searchContainer {
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+  }
+}
+
+.searchContainer {
+  width: 100%;
+  margin-left: auto;
+  box-sizing: border-box;
+  margin-right: auto;
+  display: block;
+  padding: 45px 16px;
+}
+
+.gridCard {
+  padding-right: 18px;
+  padding-bottom: 12px;
+}
