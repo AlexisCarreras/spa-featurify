@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   Button,
   Card,
@@ -12,9 +13,20 @@ import { useChartOptions } from "./chart/useChartOptions";
 import { dataTrackFeature } from "./mock/dataTrackFeature";
 
 import style from "./style.module.css";
+import { ModalFeatures } from "./ModalFeatures";
 
 export const TrackAnalysis: React.FunctionComponent = () => {
   const chartOptions = useChartOptions();
+
+  const [open, setOpen] = useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const chartSeries = [
     {
@@ -47,13 +59,15 @@ export const TrackAnalysis: React.FunctionComponent = () => {
       <Divider className={style.divider} />
       <CardActions sx={{ justifyContent: "flex-end" }}>
         <Button
+          onClick={handleClickOpen}
           color="inherit"
           className={style.button}
           size="small"
         >
-          Guardar en Favoritos
+          Descripción de características
         </Button>
       </CardActions>
+      <ModalFeatures open={open} handleClose={handleClose} />
     </Card>
   );
 };
