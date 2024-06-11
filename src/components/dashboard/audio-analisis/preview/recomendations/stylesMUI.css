@@ -1,0 +1,20 @@
+.css-1ygcj2i-MuiTableCell-root {
+  font-family: Inter !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  line-height: 1rem !important;
+  text-align: left !important;
+  padding: 10px !important;
+  color: #667085 !important;
+  background-color: #f9fafb !important;
+}
+
+.css-1ex1afd-MuiTableCell-root {
+  font-family: Inter !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.57 !important;
+  text-align: left;
+  padding: 10px !important;
+  color: #212636 !important;
+}

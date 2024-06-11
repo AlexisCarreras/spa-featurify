@@ -12,7 +12,7 @@ import {
   ListItemText,
   Tooltip,
 } from "@mui/material";
-import {  ArrowForward, ArrowRight, KeyboardArrowRight } from "@mui/icons-material";
+import {  ArrowForward, KeyboardArrowRight } from "@mui/icons-material";
 
 import style from "./style.module.css";
 import "./stylesMUI.css";

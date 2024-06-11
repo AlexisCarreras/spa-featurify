@@ -20,7 +20,29 @@
   padding: 45px 16px;
 }
 
-.gridCard {
+.gridCardDetails {
   padding-right: 18px;
   padding-bottom: 12px;
+}
+
+.gridCardBarFeatures {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+}
+
+.gridCardAlbumDetails {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  padding-right: 12px;
+}
+
+.gridCardFavorites {
+  padding-top: 12px;
+  padding-right: 12px;
+}
+
+.gridCardRecomendations {
+  padding-top: 12px;
+  padding-left: 12px;
 }
