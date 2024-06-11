@@ -8,21 +8,27 @@ import {
 } from "@mui/material";
 
 import { Chart } from "./chart/Chart";
+import { useChartOptions } from "./chart/useChartOptions";
+import { dataTrackFeature } from "./mock/dataTrackFeature";
 
 import style from "./style.module.css";
-import { useChartOptions } from "./chart/useChartOptions";
 
 export const TrackAnalysis: React.FunctionComponent = () => {
   const chartOptions = useChartOptions();
 
   const chartSeries = [
     {
-      name: "2024",
-      data: [30, 40, 35, 50, 49, 60, 70, 91, 125, 100, 115, 130],
-    },
-    {
-      name: "2023",
-      data: [20, 30, 45, 50, 49, 60, 70, 91, 125, 100, 115, 130],
+      name: "Feature",
+      data: [
+        dataTrackFeature.danceability,
+        dataTrackFeature.energy,
+        dataTrackFeature.loudness,
+        dataTrackFeature.speechiness,
+        dataTrackFeature.acousticness,
+        dataTrackFeature.instrumentalness,
+        dataTrackFeature.liveness,
+        dataTrackFeature.valence,
+      ],
     },
   ];
 
@@ -31,18 +37,18 @@ export const TrackAnalysis: React.FunctionComponent = () => {
       <CardHeader title="Análisis del Track" />
       <CardContent>
         <Chart
-          height={350}
+          height={400}
           options={chartOptions}
           series={chartSeries}
           type="bar"
           width="100%"
         />
       </CardContent>
-      <Divider />
+      <Divider className={style.divider} />
       <CardActions sx={{ justifyContent: "flex-end" }}>
         <Button
           color="inherit"
-          //   endIcon={<ArrowRightIcon fontSize="var(--icon-fontSize-md)" />}
+          className={style.button}
           size="small"
         >
           Guardar en Favoritos

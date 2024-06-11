@@ -3,6 +3,7 @@ import { alpha } from "@mui/material/styles";
 
 export function useChartOptions() {
   const theme = useTheme();
+  const primaryColor = "#635bff";
 
   return {
     chart: {
@@ -11,8 +12,8 @@ export function useChartOptions() {
       toolbar: { show: false },
     },
     colors: [
-      theme.palette.primary.main,
-      alpha(theme.palette.primary.main, 0.25),
+      primaryColor,
+      alpha(primaryColor, 0.25),
     ],
     dataLabels: { enabled: false },
     fill: { opacity: 1, type: "solid" },
@@ -30,27 +31,26 @@ export function useChartOptions() {
       axisBorder: { color: theme.palette.divider, show: true },
       axisTicks: { color: theme.palette.divider, show: true },
       categories: [
-        "Jan",
-        "Feb",
-        "Mar",
-        "Apr",
-        "May",
-        "Jun",
-        "Jul",
-        "Aug",
-        "Sep",
-        "Oct",
-        "Nov",
-        "Dec",
+        "Danceability",
+        "Energy",
+        "Loudness",
+        "Speechiness",
+        "Acousticness",
+        "Instrumentalness",
+        "Liveness",
+        "Valence",
       ],
       labels: { offsetY: 5, style: { colors: theme.palette.text.secondary } },
     },
     yaxis: {
       labels: {
-        formatter: (value: number) => (value > 0 ? `${value}K` : `${value}`),
+        formatter: (value: number) => value.toFixed(1),
         offsetX: -10,
         style: { colors: theme.palette.text.secondary },
       },
+      min: 0.0,
+      max: 1.0,
+      tickAmount: 10,
     },
   };
 }
