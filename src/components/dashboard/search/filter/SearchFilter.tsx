@@ -4,12 +4,15 @@ import style from "./style.module.css";
 import { SearchFilterProps } from "./type";
 
 export const SearchFilter: React.FunctionComponent<SearchFilterProps> = ({
-  showTable,
-  setShowTable,
+  query,
+  setQuery,
+  onSearch,
 }) => {
   return (
     <Card className={style.card} sx={{ p: 2 }}>
       <OutlinedInput
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
         className={style.searchInput}
         fullWidth
         placeholder="Nombre del Track"
@@ -26,7 +29,7 @@ export const SearchFilter: React.FunctionComponent<SearchFilterProps> = ({
         }}
       />
       <Button
-        onClick={() => setShowTable(!showTable)}
+        onClick={onSearch}
         className={style.button}
         variant="contained"
         endIcon={<Send />}

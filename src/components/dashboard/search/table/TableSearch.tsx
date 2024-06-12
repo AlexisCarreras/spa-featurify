@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -19,41 +19,41 @@ import {
 } from "@mui/material";
 import { Favorite, FavoriteBorder, Leaderboard } from "@mui/icons-material";
 import style from "./style.module.css";
-import { dataSearch } from "../mock/dataSearch";
-import { DataSearch, Track } from "../type";
+import { Track, TableSearchProps } from "./type";
 import { useformatDuration } from "../../../../hooks/useFormatDuration";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
 };
 
-export const TableSearch: React.FunctionComponent = () => {
-  const initialTracks = {
-    ...dataSearch,
-    items: dataSearch.items.map((track) => ({
-      ...track,
-      isFavorite: track.isFavorite ?? false,
-    })),
-  };
-
-  const [tracks, setTracks] = useState<DataSearch>(initialTracks);
-
+export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
+  tracks,
+}) => {
+  const [localTracks, setLocalTracks] = useState<Track[]>([]);
   const [snackBar, setSnackBar] = useState({
     open: false,
     text: "",
   });
 
+  useEffect(() => {
+    setLocalTracks(
+      tracks.map((track) => ({
+        ...track,
+        isFavorite: track.isFavorite ?? false,
+      }))
+    );
+  }, [tracks]);
+
   const toggleFavorite = (trackId: string) => {
-    setTracks((prevTracks) => ({
-      ...prevTracks,
-      items: prevTracks.items.map((track) =>
+    setLocalTracks((prevTracks) =>
+      prevTracks.map((track) =>
         track.idTrack === trackId
           ? { ...track, isFavorite: !track.isFavorite }
           : track
-      ),
-    }));
+      )
+    );
 
-    const track = tracks.items.find((track) => track.idTrack === trackId);
+    const track = localTracks.find((track) => track.idTrack === trackId);
     const action = track?.isFavorite ? "quitado de" : "añadido a";
 
     setSnackBar({
@@ -96,7 +96,7 @@ export const TableSearch: React.FunctionComponent = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {tracks.items.map((track: Track, index: number) => (
+            {localTracks.map((track: Track, index: number) => (
               <TableRow key={index} hover>
                 <TableCell>
                   <Stack
@@ -169,7 +169,7 @@ export const TableSearch: React.FunctionComponent = () => {
       </Box>
       <TablePagination
         component="div"
-        count={tracks.items.length}
+        count={localTracks.length}
         onPageChange={noop}
         onRowsPerPageChange={noop}
         page={0}

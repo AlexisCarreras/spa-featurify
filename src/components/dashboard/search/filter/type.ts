@@ -1,4 +1,5 @@
 export interface SearchFilterProps {
-  showTable: boolean;
-  setShowTable: (showTable: boolean) => void;
+  query: string;
+  setQuery: (query: string) => void;
+  onSearch: () => void;
 }
