@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import {
   Avatar,
   Box,
@@ -18,9 +18,13 @@ import {
   Typography,
 } from "@mui/material";
 import { Favorite, FavoriteBorder, Leaderboard } from "@mui/icons-material";
+import Skeleton from "@mui/material/Skeleton";
 import style from "./style.module.css";
 import { Track, TableSearchProps } from "./type";
 import { useformatDuration } from "../../../../hooks/useFormatDuration";
+import { deleteFavoriteTrackService } from "../../../../services/Favorites/DeleteTracks/deleteFavoriteTrackService";
+import { addFavoriteTrackService } from "../../../../services/Favorites/AddTracks/addFavoriteTrackService";
+import { GetAllFavoritesTrack } from "../../../../services/Favorites/GetAllTracks/type";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
@@ -28,8 +32,13 @@ const TransitionSlide = (props: any) => {
 
 export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
   tracks,
+  favorites,
+  setFavorites,
 }) => {
   const [localTracks, setLocalTracks] = useState<Track[]>([]);
+  const [loadingAvatars, setLoadingAvatars] = useState<{
+    [key: string]: boolean;
+  }>({});
   const [snackBar, setSnackBar] = useState({
     open: false,
     text: "",
@@ -39,28 +48,17 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
     setLocalTracks(
       tracks.map((track) => ({
         ...track,
-        isFavorite: track.isFavorite ?? false,
+        isFavorite: favorites.some((fav) => fav.idTrack === track.idTrack),
       }))
     );
-  }, [tracks]);
+  }, [tracks, favorites]);
 
-  const toggleFavorite = (trackId: string) => {
-    setLocalTracks((prevTracks) =>
-      prevTracks.map((track) =>
-        track.idTrack === trackId
-          ? { ...track, isFavorite: !track.isFavorite }
-          : track
-      )
-    );
-
-    const track = localTracks.find((track) => track.idTrack === trackId);
-    const action = track?.isFavorite ? "quitado de" : "añadido a";
-
-    setSnackBar({
-      open: true,
-      text: `Track ${action} favoritos`,
-    });
-  };
+  const isMounted = useRef(true);
+  useEffect(() => {
+    return () => {
+      isMounted.current = false;
+    };
+  }, []);
 
   const handleCloseSnackBar = () => {
     setSnackBar({
@@ -69,9 +67,82 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
     });
   };
 
-  function noop(): void {
-    // do nothing
-  }
+  const toggleFavorite = async (trackId: string, isFavorite?: boolean) => {
+    if (!isMounted.current) return;
+
+    try {
+      if (isFavorite) {
+        const favorite = favorites.find((fav) => fav.idTrack === trackId);
+        if (!favorite) return;
+
+        await deleteFavoriteTrackService(favorite._id);
+
+        if (!isMounted.current) return;
+
+        setLocalTracks((prevTracks) =>
+          prevTracks.map((track) =>
+            track.idTrack === trackId ? { ...track, isFavorite: false } : track
+          )
+        );
+        const updatedFavorites = favorites.filter(
+          (fav: GetAllFavoritesTrack) => fav._id !== favorite._id
+        );
+        setFavorites(updatedFavorites);
+
+        if (isMounted.current) {
+          console.log("SnackBar should open: Track quitado de favoritos");
+          setSnackBar({
+            open: true,
+            text: "Track quitado de favoritos",
+          });
+        }
+      } else {
+        const newFavorite = localTracks.find(
+          (track) => track.idTrack === trackId
+        );
+        if (!newFavorite) return;
+
+        const addedFavorite = await addFavoriteTrackService({
+          album: newFavorite.album,
+          artist: newFavorite.artist,
+          idTrack: newFavorite.idTrack,
+          nameTrack: newFavorite.nameTrack,
+        });
+
+        if (!isMounted.current) return;
+
+        setLocalTracks((prevTracks) =>
+          prevTracks.map((track) =>
+            track.idTrack === trackId ? { ...track, isFavorite: true } : track
+          )
+        );
+
+        const updatedFavorites = [...favorites, addedFavorite];
+        setFavorites(updatedFavorites);
+
+        if (isMounted.current) {
+          console.log("SnackBar should open: Track añadido a favoritos");
+          setSnackBar({
+            open: true,
+            text: "Track añadido a favoritos",
+          });
+        }
+      }
+    } catch (error) {
+      console.error(
+        `Error al ${isFavorite ? "quitar" : "añadir"} el track de favoritos`,
+        error
+      );
+      if (isMounted.current) {
+        setSnackBar({
+          open: true,
+          text: `Error al ${
+            isFavorite ? "quitar" : "añadir"
+          } el track de favoritos`,
+        });
+      }
+    }
+  };
 
   const dataTable = [
     "Track",
@@ -104,7 +175,30 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
                     direction="row"
                     spacing={2}
                   >
-                    <Avatar src={track.album.images[0].url} />
+                    {loadingAvatars[track.idTrack] ? (
+                      <Skeleton variant="circular" width={40} height={40} />
+                    ) : (
+                      <Avatar
+                        src={track.album.images[0].url}
+                        onLoad={() =>
+                          setLoadingAvatars((prev) => ({
+                            ...prev,
+                            [track.idTrack]: false,
+                          }))
+                        }
+                        onError={() =>
+                          setLoadingAvatars((prev) => ({
+                            ...prev,
+                            [track.idTrack]: false,
+                          }))
+                        }
+                        style={{
+                          display: loadingAvatars[track.idTrack]
+                            ? "none"
+                            : "block",
+                        }}
+                      />
+                    )}
                     <Typography
                       variant="subtitle2"
                       className={style.tableCellDataPrimary}
@@ -123,27 +217,28 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
                   {useformatDuration(track.durationMs)}
                 </TableCell>
                 <TableCell>
-                  <IconButton
-                    color="primary"
-                    aria-label="add to favorites"
-                    onClick={() => toggleFavorite(track.idTrack)}
+                  <Tooltip
+                    title={
+                      track.isFavorite
+                        ? "Quitar de Favoritos"
+                        : "Añadir a Favoritos"
+                    }
+                    placement="left-start"
                   >
-                    {track.isFavorite ? (
-                      <Tooltip
-                        title="Quitar de Favoritos"
-                        placement="left-start"
-                      >
+                    <IconButton
+                      color="primary"
+                      aria-label="toggle favorite"
+                      onClick={() =>
+                        toggleFavorite(track.idTrack, track.isFavorite)
+                      }
+                    >
+                      {track.isFavorite ? (
                         <Favorite className={style.icon} />
-                      </Tooltip>
-                    ) : (
-                      <Tooltip
-                        title="Añadir a Favoritos"
-                        placement="left-start"
-                      >
+                      ) : (
                         <FavoriteBorder className={style.icon} />
-                      </Tooltip>
-                    )}
-                  </IconButton>
+                      )}
+                    </IconButton>
+                  </Tooltip>
                 </TableCell>
                 <TableCell>
                   <Button
@@ -170,8 +265,8 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
       <TablePagination
         component="div"
         count={localTracks.length}
-        onPageChange={noop}
-        onRowsPerPageChange={noop}
+        onPageChange={() => {}}
+        onRowsPerPageChange={() => {}}
         page={0}
         rowsPerPage={5}
         rowsPerPageOptions={[5, 10, 25]}

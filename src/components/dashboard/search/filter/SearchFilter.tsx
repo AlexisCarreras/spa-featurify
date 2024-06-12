@@ -29,6 +29,7 @@ export const SearchFilter: React.FunctionComponent<SearchFilterProps> = ({
         }}
       />
       <Button
+        disabled={!query}
         onClick={onSearch}
         className={style.button}
         variant="contained"

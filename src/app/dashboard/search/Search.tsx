@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Alert,
   Box,
@@ -17,14 +17,30 @@ import { searchTracks } from "../../../services/Tracks/searchTrack/searchTrackSe
 
 import style from "./style.module.css";
 import "./stylesMUI.css";
+import { getAllFavoritesService } from "../../../services/Favorites/GetAllTracks/getAllFavoritesService";
+import { GetAllFavoritesTrack } from "../../../services/Favorites/GetAllTracks/type";
 
 export const Search = () => {
   const [query, setQuery] = useState("");
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [favorites, setFavorites] = useState<GetAllFavoritesTrack[]>([]);
 
   const [showTable, setShowTable] = useState(false);
+
+  useEffect(() => {
+    const fetchFavorites = async () => {
+      try {
+        const favoriteTracks = await getAllFavoritesService();
+        setFavorites(favoriteTracks);
+      } catch (error) {
+        console.error("Error al obtener los tracks favoritos", error);
+      }
+    };
+
+    fetchFavorites();
+  }, []);
 
   const handleSearch = async () => {
     setLoading(true);
@@ -71,7 +87,16 @@ export const Search = () => {
           <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
         </Box>
       ) : (
-        showTable && <TableSearch tracks={tracks} />
+        showTable && (
+          <Box>
+            <TableSearch
+              key={favorites.length}
+              tracks={tracks}
+              favorites={favorites}
+              setFavorites={setFavorites}
+            />
+          </Box>
+        )
       )}
     </Stack>
   );

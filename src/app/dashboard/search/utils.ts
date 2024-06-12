@@ -7,6 +7,7 @@ export const features = [
   "Instrumentalness",
   "Liveness",
   "Valence",
+  "Time Signature",
   "Tempo",
-  "Nota",
+  "Key",
 ];
