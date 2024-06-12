@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -17,40 +17,56 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
-import { Favorite, FavoriteBorder, Leaderboard } from "@mui/icons-material";
+import { Favorite, Leaderboard } from "@mui/icons-material";
 
 import style from "./style.module.css";
-import { dataFavorites } from "../mock/dataFavorites";
-import { DataFavorites, Track } from "../type";
+import { Track } from "../type";
+import { getAllFavoritesService } from "../../../../services/Favorites/GetAllTracks/getAllFavoritesService";
+import { deleteFavoriteTrackService } from "../../../../services/Favorites/DeleteTracks/deleteFavoriteTrackService";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
 };
 
 export const TableFavorites: React.FunctionComponent = () => {
-  const [tracks, setTracks] = useState<DataFavorites>(dataFavorites);
-
+  const [tracks, setTracks] = useState<Track[]>([]);
+  const [refreshFavorites, setRefreshFavorites] = useState(false);
   const [snackBar, setSnackBar] = useState({
     open: false,
     text: "",
   });
 
-  const toggleFavorite = (trackId: string) => {
-    setTracks((prevTracks) =>
-      prevTracks.map((track) =>
-        track.idTrack === trackId
-          ? { ...track, isFavorite: !track.isFavorite }
-          : track
-      )
-    );
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const updatedFavorites = await getAllFavoritesService();
+        setTracks(updatedFavorites);
+      } catch (error) {
+        console.error("Error al obtener los favoritos:", error);
+      } finally {
+        setRefreshFavorites(false);
+      }
+    };
 
-    const track = tracks.find((track) => track.idTrack === trackId);
-    const action = track?.isFavorite ? "quitado de" : "añadido a";
+    fetchData();
+  }, [refreshFavorites]);
 
-    setSnackBar({
-      open: true,
-      text: `Track ${action} favoritos`,
-    });
+  const toggleFavorite = async (trackId: string) => {
+    try {
+      const favorite = tracks.find((fav) => fav.idTrack === trackId);
+      if (!favorite) return;
+
+      await deleteFavoriteTrackService(favorite._id);
+
+      setRefreshFavorites(!refreshFavorites);
+
+      setSnackBar({
+        open: true,
+        text: "Track quitado de favoritos",
+      });
+    } catch (error) {
+      console.error("Error al eliminar favorito:", error);
+    }
   };
 
   const handleCloseSnackBar = () => {
@@ -61,7 +77,7 @@ export const TableFavorites: React.FunctionComponent = () => {
   };
 
   function noop(): void {
-    // do nothing
+    // Función no operativa
   }
 
   const dataTable = [
@@ -87,7 +103,7 @@ export const TableFavorites: React.FunctionComponent = () => {
           </TableHead>
           <TableBody>
             {tracks.map((track: Track) => (
-              <TableRow key={track._id} hover>
+              <TableRow key={track.idTrack} hover>
                 <TableCell>
                   <Stack
                     sx={{ alignItems: "center" }}
@@ -112,24 +128,12 @@ export const TableFavorites: React.FunctionComponent = () => {
                 <TableCell>
                   <IconButton
                     color="primary"
-                    aria-label="add to favorites"
+                    aria-label="remove from favorites"
                     onClick={() => toggleFavorite(track.idTrack)}
                   >
-                    {track.isFavorite ? (
-                      <Tooltip
-                        title="Quitar de Favoritos"
-                        placement="left-start"
-                      >
-                        <Favorite className={style.icon} />
-                      </Tooltip>
-                    ) : (
-                      <Tooltip
-                        title="Añadir a Favoritos"
-                        placement="left-start"
-                      >
-                        <FavoriteBorder className={style.icon} />
-                      </Tooltip>
-                    )}
+                    <Tooltip title="Quitar de Favoritos" placement="left-start">
+                      <Favorite className={style.icon} />
+                    </Tooltip>
                   </IconButton>
                 </TableCell>
                 <TableCell>
@@ -147,10 +151,10 @@ export const TableFavorites: React.FunctionComponent = () => {
         </Table>
         <Snackbar
           open={snackBar.open}
-          autoHideDuration={2000}
+          autoHideDuration={3000}
           onClose={handleCloseSnackBar}
           message={snackBar.text}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
           TransitionComponent={TransitionSlide}
         />
       </Box>

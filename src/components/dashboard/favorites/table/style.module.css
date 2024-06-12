@@ -1,50 +1,50 @@
 .card {
-    box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.04),
-      inset 0px 0px 0px 1px rgba(0, 0, 0, 0.06) !important;
-    border-radius: 20px !important;
-  }
-  
-  .tableHead {
-    border: 1px solid #dcdfe4 !important;
-    background-color: #f9fafb !important;
-  }
-  
-  .tableCellHeader {
-    font-weight: 500 !important;
-    font-size: 0.875rem !important;
-    color: #667085 !important;
-    font-family: Inter !important;
-    line-height: 1 !important;
-  }
-  
-  .tableCellDataPrimary {
-    font-family: Inter !important;
-    font-weight: 500 !important;
-    font-size: 0.875rem !important;
-    line-height: 1.57 !important;
-  }
-  
-  .tableCellDataSecondary {
-    font-family: Inter !important;
-    font-weight: 400 !important;
-    font-size: 0.875rem !important;
-    line-height: 1.57 !important;
-    color: #212636 !important;
-  }
-  
-  .icon {
-    color: #4e36f5;
-  }
-  
-  .button {
-    border: #635bff 1px solid !important;
-    color: #635bff !important;
-    text-transform: none !important;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08) !important;
-    border-radius: 12px !important;
-    padding: 8px 20px !important;
-    font-family: Inter !important;
-    font-size: 0.875rem !important;
-    line-height: 1 !important;
-  }
-  
+  box-shadow: 0px 5px 22px 0px rgba(0, 0, 0, 0.04),
+    inset 0px 0px 0px 1px rgba(0, 0, 0, 0.06) !important;
+  border-radius: 20px !important;
+}
+
+.tableHead {
+  border: 1px solid #dcdfe4 !important;
+  background-color: #f9fafb !important;
+}
+
+.tableCellHeader {
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  color: #667085 !important;
+  font-family: Inter !important;
+  line-height: 1 !important;
+  padding: 16px 8px !important;
+}
+
+.tableCellDataPrimary {
+  font-family: Inter !important;
+  font-weight: 500 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.57 !important;
+}
+
+.tableCellDataSecondary {
+  font-family: Inter !important;
+  font-weight: 400 !important;
+  font-size: 0.875rem !important;
+  line-height: 1.57 !important;
+  color: #212636 !important;
+}
+
+.icon {
+  color: #4e36f5;
+}
+
+.button {
+  border: #635bff 1px solid !important;
+  color: #635bff !important;
+  text-transform: none !important;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08) !important;
+  border-radius: 12px !important;
+  padding: 8px 20px !important;
+  font-family: Inter !important;
+  font-size: 0.875rem !important;
+  line-height: 1 !important;
+}
