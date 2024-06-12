@@ -17,21 +17,14 @@ export interface Artist {
 
 export interface Track {
   idTrack: string;
-  type: string;
   nameTrack: string;
-  durationMs: number;
+  duration_ms: number;
   explicit: boolean;
-  artist: { idArtist: string; nameArtist: string }[];
-  album: {
-    idAlbum: string;
-    nameAlbum: string;
-    images: { url: string; height: number; width: number }[];
-  };
-  isFavorite?: boolean;
+  type: string;
+  album: Album;
+  artists: Artist[];
 }
 
-export interface Recommendation {
+export interface GetRecommendationsResponse {
   tracks: Track[];
 }
-
-export type DataRecommendations = Recommendation[];
