@@ -27,7 +27,14 @@ import { UseLoading } from "../../../../../hooks/UseLoading";
 
 export const RecomendationsPreview: React.FunctionComponent<
   DataRecomendationsPreview
-> = ({ nameTrack, seedTrack, seedArtist, limit }) => {
+> = ({
+  nameTrack,
+  seedTrack,
+  seedArtist,
+  limit,
+  flagTrackId,
+  setFlagTrackId,
+}) => {
   const navigate = useNavigate();
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,9 +72,9 @@ export const RecomendationsPreview: React.FunctionComponent<
     };
 
     fetchRecommendations();
-  }, [limit, seedTrack, seedArtist]);
+  }, [flagTrackId]);
 
-  const handleGetAnalysis = () => {
+  const handleGetAllRecomendations = () => {
     localStorage.setItem(
       "tracksRecomendations",
       JSON.stringify({
@@ -78,6 +85,11 @@ export const RecomendationsPreview: React.FunctionComponent<
       })
     );
     navigate("/recomendations");
+  };
+
+  const handleGetAnalysis = (trackId: string) => {
+    localStorage.setItem("selectedTrackId", trackId);
+    setFlagTrackId(!flagTrackId);
   };
 
   return (
@@ -168,7 +180,10 @@ export const RecomendationsPreview: React.FunctionComponent<
                           title="Ver Análisis del Track"
                           placement="left-start"
                         >
-                          <IconButton edge="end">
+                          <IconButton
+                            edge="end"
+                            onClick={() => handleGetAnalysis(track.idTrack)}
+                          >
                             <KeyboardArrowRight />
                           </IconButton>
                         </Tooltip>
@@ -184,7 +199,7 @@ export const RecomendationsPreview: React.FunctionComponent<
             <Link to="/recomendations">
               <Button
                 className={style.buttonSeeMore}
-                onClick={handleGetAnalysis}
+                onClick={handleGetAllRecomendations}
                 color="inherit"
                 endIcon={<ArrowForward />}
                 size="small"

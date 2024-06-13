@@ -155,6 +155,8 @@ export const AudioAnalisis: React.FunctionComponent = () => {
                   seedTrack={selectedTrackId}
                   seedArtist={artists}
                   limit={4}
+                  flagTrackId={flagTrackId}
+                  setFlagTrackId={setFlagTrackId}
                 />
               )
             )}

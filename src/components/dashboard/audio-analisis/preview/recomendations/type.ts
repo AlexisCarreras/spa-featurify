@@ -30,4 +30,6 @@ export interface DataRecomendationsPreview {
   seedTrack: string;
   seedArtist: Artist[];
   limit: number;
+  flagTrackId: boolean;
+  setFlagTrackId: (flagTrackId: boolean) => void;
 }
