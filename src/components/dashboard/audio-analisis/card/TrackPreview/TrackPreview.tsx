@@ -18,7 +18,6 @@ import {
   VolumeDownRounded,
   VolumeUpRounded,
 } from "@mui/icons-material";
-import { useTheme } from "@mui/material/styles";
 
 import style from "./style.module.css";
 import "./stylesMUI.css";
@@ -34,10 +33,8 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
   url,
   loadingTrack,
 }) => {
-  const theme = useTheme();
-  const mainIconColor = theme.palette.mode === "dark" ? "#fff" : "#000";
-  const lightIconColor =
-    theme.palette.mode === "dark" ? "#fff" : "rgba(0,0,0,0.54)";
+  const mainIconColor = "#222"; // Define el color principal
+  const lightIconColor = "#222"; // Define el color para iconos de volumen
 
   const [playing, setPlaying] = useState(false);
   const [volume, setVolume] = useState(0.3);
@@ -47,8 +44,8 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
 
   const handlePlayPause = () => setPlaying(!playing);
 
-  const handleVolumeChange = (event: Event, newValue: number | number[]) => {
-    setVolume((newValue as number) / 100); // Convert volume to the range 0-1
+  const handleVolumeChange = (_: Event, newValue: number | number[]) => {
+    setVolume((newValue as number) / 100); // Convertir el volumen al rango: 0-1
   };
 
   const handleProgress = (state: { playedSeconds: number }) => {
@@ -59,7 +56,7 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
     setDuration(dur);
   };
 
-  const handleSeekChange = (event: Event, newValue: number | number[]) => {
+  const handleSeekChange = (_: Event, newValue: number | number[]) => {
     setPosition(newValue as number);
     if (playerRef.current) {
       playerRef.current.seekTo(newValue as number, "seconds");
@@ -109,8 +106,7 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
             max={duration}
             onChange={handleSeekChange}
             sx={{
-              color:
-                theme.palette.mode === "dark" ? "#fff" : "rgba(0,0,0,0.87)",
+              color: "#4E36F5",
               height: 4,
               "& .MuiSlider-thumb": {
                 width: 8,
@@ -120,11 +116,7 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
                   boxShadow: "0 2px 12px 0 rgba(0,0,0,0.4)",
                 },
                 "&:hover, &.Mui-focusVisible": {
-                  boxShadow: `0px 0px 0px 8px ${
-                    theme.palette.mode === "dark"
-                      ? "rgb(255 255 255 / 16%)"
-                      : "rgb(0 0 0 / 16%)"
-                  }`,
+                  boxShadow: `0px 0px 0px 8px rgba(78, 54, 245, 0.16)`,
                 },
                 "&.Mui-active": {
                   width: 20,
@@ -158,26 +150,28 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
             }}
           >
             <IconButton aria-label="previous song">
-              <FastRewindRounded fontSize="large" htmlColor={mainIconColor} />
+              <FastRewindRounded
+                fontSize="large"
+                sx={{ color: mainIconColor }}
+              />
             </IconButton>
             <IconButton
               aria-label={playing ? "pause" : "play"}
               onClick={handlePlayPause}
             >
               {playing ? (
-                <PauseRounded
-                  sx={{ fontSize: "3rem" }}
-                  htmlColor={mainIconColor}
-                />
+                <PauseRounded sx={{ fontSize: "3rem", color: mainIconColor }} />
               ) : (
                 <PlayArrowRounded
-                  sx={{ fontSize: "3rem" }}
-                  htmlColor={mainIconColor}
+                  sx={{ fontSize: "3rem", color: mainIconColor }}
                 />
               )}
             </IconButton>
             <IconButton aria-label="next song">
-              <FastForwardRounded fontSize="large" htmlColor={mainIconColor} />
+              <FastForwardRounded
+                fontSize="large"
+                sx={{ color: mainIconColor }}
+              />
             </IconButton>
           </Box>
           <Stack
@@ -186,14 +180,13 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
             sx={{ mb: 1, px: 1 }}
             alignItems="center"
           >
-            <VolumeDownRounded htmlColor={lightIconColor} />
+            <VolumeDownRounded sx={{ color: lightIconColor }} />
             <Slider
               aria-label="Volume"
-              value={volume * 100} // Convert volume to the range 0-100
+              value={volume * 100} // Convertir el volumen al rango de: 0-100
               onChange={handleVolumeChange}
               sx={{
-                color:
-                  theme.palette.mode === "dark" ? "#fff" : "rgba(0,0,0,0.87)",
+                color: "#4E36F5",
                 "& .MuiSlider-track": {
                   border: "none",
                 },
@@ -210,7 +203,7 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
                 },
               }}
             />
-            <VolumeUpRounded htmlColor={lightIconColor} />
+            <VolumeUpRounded sx={{ color: lightIconColor }} />
           </Stack>
         </CardContent>
       )}

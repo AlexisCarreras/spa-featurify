@@ -16,6 +16,7 @@
   font-weight: 500 !important;
   font-size: 1rem !important;
   line-height: 1.2 !important;
+  text-align: center !important;
 }
 
 .descriptionDetailsAlbum {
@@ -25,6 +26,8 @@
   font-size: 0.875rem !important;
   line-height: 1.57 !important;
   color: #667085 !important;
+  text-align: center !important;
+  margin-bottom: 1rem !important;
 }
 
 .iconDetailsAlbum {
