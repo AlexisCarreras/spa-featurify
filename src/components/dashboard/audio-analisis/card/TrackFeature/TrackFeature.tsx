@@ -3,6 +3,7 @@ import {
   Box,
   Card,
   CardContent,
+  CircularProgress,
   Stack,
   Typography,
 } from "@mui/material";
@@ -15,6 +16,7 @@ import "./stylesMUI.css";
 import { CardDetailTracksProps } from "./type";
 
 export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
+  loading,
   tempo,
   timeSignature,
   typeNote,
@@ -64,41 +66,54 @@ export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
 
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
-      <CardContent>
-        <Stack spacing={3}>
-          <Stack
-            direction="row"
-            sx={{ alignItems: "flex-start", justifyContent: "space-between" }}
-            spacing={3}
-          >
-            <Stack spacing={1}>
-              <Typography className={style.title} variant="overline">
-                Características
-              </Typography>
-              <Typography variant="h4" className={style.description}>
-                {`${keyDescription} ${modeDescription}`}
-              </Typography>
-              <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
-                <Typography className={style.description} variant="h4">
-                  {`${Math.round(tempo)} BPM`}
-                </Typography>
-                <Typography className={style.description} variant="h4">
-                  {descriptionTimeSignature}
-                </Typography>
-              </Box>
-            </Stack>
-            <Avatar
-              sx={{
-                bgcolor: "#15b79f",
-                height: "56px",
-                width: "56px",
-              }}
+      {loading ? (
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "5vh",
+          }}
+        >
+          <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
+        </Box>
+      ) : (
+        <CardContent>
+          <Stack spacing={3}>
+            <Stack
+              direction="row"
+              sx={{ alignItems: "flex-start", justifyContent: "space-between" }}
+              spacing={3}
             >
-              <Speed />
-            </Avatar>
+              <Stack spacing={1}>
+                <Typography className={style.title} variant="overline">
+                  Características
+                </Typography>
+                <Typography variant="h4" className={style.description}>
+                  {`${keyDescription} ${modeDescription}`}
+                </Typography>
+                <Box sx={{ display: "flex", alignItems: "center", gap: 2 }}>
+                  <Typography className={style.description} variant="h4">
+                    {`${Math.round(tempo)} BPM`}
+                  </Typography>
+                  <Typography className={style.description} variant="h4">
+                    {descriptionTimeSignature}
+                  </Typography>
+                </Box>
+              </Stack>
+              <Avatar
+                sx={{
+                  bgcolor: "#15b79f",
+                  height: "56px",
+                  width: "56px",
+                }}
+              >
+                <Speed />
+              </Avatar>
+            </Stack>
           </Stack>
-        </Stack>
-      </CardContent>
+        </CardContent>
+      )}
     </Card>
   );
 };

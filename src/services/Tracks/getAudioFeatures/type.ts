@@ -1,4 +1,4 @@
-export interface DataTrackFeature {
+export interface AudioFeatures {
   idTrack: string;
   danceability: number;
   energy: number;
@@ -13,9 +13,4 @@ export interface DataTrackFeature {
   tempo: number;
   durationMs: number;
   timeSignature: number;
-}
-
-export interface TrackAnalysisProp {
-  dataTrackFeature: DataTrackFeature;
-  loading: boolean;
 }
