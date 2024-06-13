@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { Alert, Grid, Stack } from "@mui/material";
+import { Alert, Card, Grid, Stack } from "@mui/material";
 import { FavoritesPreview } from "../../../components/dashboard/audio-analisis/preview/favorites/FavoritesPreview";
 
 import style from "./style.module.css";
@@ -16,6 +16,7 @@ import { AudioFeatures } from "../../../services/Tracks/getAudioFeatures/type";
 import { getTrackService } from "../../../services/Tracks/getTrack/getTrackService";
 import { Track } from "../../../services/Tracks/getTrack/type";
 import { dataInitialFeatures, dataInitialTrack } from "./utils";
+import { UseLoading } from "../../../hooks/UseLoading";
 
 export const AudioAnalisis: React.FunctionComponent = () => {
   const selectedTrackId = localStorage.getItem("selectedTrackId");
@@ -64,7 +65,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
   const { durationMs, loudness, tempo, timeSignature, key, mode } =
     audioFeatures;
 
-  const { nameTrack, previewTrackUrl, album } = track;
+  const { nameTrack, previewTrackUrl, album, artists } = track;
 
   return (
     <Stack className={style.searchContainer} spacing={3}>
@@ -125,13 +126,33 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           )}
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardAlbumDetails}>
-          {errorTrack ? <></> : <AlbumDetails album={album} loadingTrack={loadingTrack} />}
+          {errorTrack ? (
+            <></>
+          ) : (
+            <AlbumDetails album={album} loadingTrack={loadingTrack} />
+          )}
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardFavorites}>
           <FavoritesPreview />
         </Grid>
         <Grid lg={8} md={12} xs={12} className={style.gridCardRecomendations}>
-          <RecomendationsPreview />
+          <Card
+            sx={{ height: "100%" }}
+            className={style.cardPreviewRecomendations}
+          >
+            {loadingTrack ? (
+              <UseLoading height="32vh" size={70} />
+            ) : (
+              selectedTrackId && (
+                <RecomendationsPreview
+                  nameTrack={nameTrack}
+                  seedTrack={selectedTrackId}
+                  seedArtist={artists}
+                  limit={4}
+                />
+              )
+            )}
+          </Card>
         </Grid>
       </Grid>
     </Stack>

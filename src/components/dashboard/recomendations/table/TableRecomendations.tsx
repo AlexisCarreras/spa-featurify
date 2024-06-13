@@ -40,12 +40,44 @@ interface Track {
   isFavorite: boolean;
 }
 
+interface RecomendationType {
+  nameTrack: string;
+  seedTrack: string;
+  seedArtist: {
+    idArtist: string;
+    nameArtist: string;
+    type: string;
+  }[];
+  limit: number;
+}
+
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
 };
 
 export const TableRecomendations: React.FunctionComponent = () => {
   const navigate = useNavigate();
+
+  const [storedRecommendations, setStoredRecommendations] =
+    useState<RecomendationType>({
+      nameTrack: "",
+      seedTrack: "",
+      seedArtist: [
+        {
+          idArtist: "",
+          nameArtist: "",
+          type: "",
+        },
+      ],
+      limit: 0,
+    });
+
+  useEffect(() => {
+    const stored = localStorage.getItem("tracksRecomendations");
+    if (stored) {
+      setStoredRecommendations(JSON.parse(stored));
+    }
+  }, []);
 
   const [tracks, setTracks] = useState<Track[]>([]);
   const [localTracks, setLocalTracks] = useState<Track[]>([]);
@@ -63,9 +95,9 @@ export const TableRecomendations: React.FunctionComponent = () => {
       try {
         const [recommendationsResponse, favoritesResponse] = await Promise.all([
           getRecommendationsService(
-            15,
-            "4VikOud5ZmdmHH6h7uQeDB",
-            "3jO7X5KupvwmWTHGtHgcgo"
+            storedRecommendations.limit,
+            storedRecommendations.seedTrack,
+            storedRecommendations.seedArtist[0].idArtist
           ),
           getAllFavoritesService(),
         ]);
@@ -101,7 +133,7 @@ export const TableRecomendations: React.FunctionComponent = () => {
     return () => {
       isMounted.current = false;
     };
-  }, []);
+  }, [storedRecommendations]);
 
   const handleCloseSnackBar = () => {
     setSnackBar({

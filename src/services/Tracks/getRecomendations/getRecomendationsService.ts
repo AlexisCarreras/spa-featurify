@@ -20,8 +20,18 @@ export const getRecommendationsService = async (
       }
     );
     return response.data;
-  } catch (error) {
-    console.error("Error fetching recommendations:", error);
+  } catch (error: any) {
+    if (error.response && error.response.status === 429) {
+      const retryAfter = error.response.data.retryAfter;
+      console.error(
+        `Too many requests. Please try again after ${retryAfter} seconds.`
+      );
+    } else {
+      console.error(
+        "Error fetching recommendations:",
+        error.response ? error.response.data : error.message
+      );
+    }
     throw error;
   }
 };

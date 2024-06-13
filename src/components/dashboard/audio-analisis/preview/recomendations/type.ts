@@ -26,5 +26,8 @@ export interface Track {
 }
 
 export interface DataRecomendationsPreview {
-  tracks: Track[];
+  nameTrack: string;
+  seedTrack: string;
+  seedArtist: Artist[];
+  limit: number;
 }
