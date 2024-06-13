@@ -14,6 +14,11 @@ import style from "./style.module.css";
 import "./stylesMUI.css";
 
 import { CardDetailTracksProps } from "./type";
+import {
+  getKeyDescription,
+  getModeDescription,
+  timeSignatureDescriptions,
+} from "./utils";
 
 export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
   tempo,
@@ -22,45 +27,8 @@ export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
   mode,
   loadingFeatures,
 }) => {
-
-  const timeSignatureDescriptions: { [key: number]: string } = {
-    3: "3/4",
-    4: "4/4",
-    5: "5/4",
-    6: "6/4",
-    7: "7/4",
-  };
-
   const descriptionTimeSignature =
     timeSignatureDescriptions[timeSignature] || "Compás desconocido";
-
-  const keyMap: { [key: number]: string } = {
-    0: "C",
-    1: "C♯/D♭",
-    2: "D",
-    3: "D♯/E♭",
-    4: "E",
-    5: "F",
-    6: "F♯/G♭",
-    7: "G",
-    8: "G♯/A♭",
-    9: "A",
-    10: "A♯/B♭",
-    11: "B",
-  };
-
-  const modeMap: { [mode: number]: string } = {
-    0: "Menor",
-    1: "Mayor",
-  };
-
-  function getKeyDescription(typeNote: number): string {
-    return keyMap[typeNote] || "Clave desconocida";
-  }
-
-  function getModeDescription(mode: number): string {
-    return modeMap[mode] || "Modo desconocido";
-  }
 
   const keyDescription = getKeyDescription(typeNote);
   const modeDescription = getModeDescription(mode);
@@ -73,10 +41,10 @@ export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "5vh",
+            height: "13vh",
           }}
         >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
+          <CircularProgress sx={{ color: "#4E36F5" }} size={70} />
         </Box>
       ) : (
         <CardContent>

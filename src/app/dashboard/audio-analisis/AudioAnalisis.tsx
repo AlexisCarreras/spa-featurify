@@ -71,13 +71,9 @@ export const AudioAnalisis: React.FunctionComponent = () => {
       <Grid container spacing={3}>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
           {errorTrack ? (
-            <Alert severity="error">
-              {errorTrack}
-            </Alert>
+            <Alert severity="error">{errorTrack}</Alert>
           ) : errorFeatures ? (
-            <Alert severity="error">
-              {errorFeatures}
-            </Alert>
+            <Alert severity="error">{errorFeatures}</Alert>
           ) : (
             <TrackName
               nameTrack={nameTrack}
@@ -90,9 +86,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
           {errorFeatures ? (
-            <Alert severity="error">
-              {errorFeatures}
-            </Alert>
+            <Alert severity="error">{errorFeatures}</Alert>
           ) : (
             <TrackFeature
               tempo={tempo}
@@ -131,7 +125,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           )}
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardAlbumDetails}>
-          {errorTrack ? <></> : <AlbumDetails album={album} />}
+          {errorTrack ? <></> : <AlbumDetails album={album} loadingTrack={loadingTrack} />}
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardFavorites}>
           <FavoritesPreview />

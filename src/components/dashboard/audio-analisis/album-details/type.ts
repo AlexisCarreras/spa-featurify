@@ -16,4 +16,5 @@ export interface Album {
 
 export interface AlbumDetailsProps {
   album: Album;
+  loadingTrack: boolean;
 }

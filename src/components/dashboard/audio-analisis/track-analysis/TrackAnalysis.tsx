@@ -1,12 +1,10 @@
 import { useState } from "react";
 import {
-  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
-  CircularProgress,
   Divider,
 } from "@mui/material";
 
@@ -16,6 +14,7 @@ import { useChartOptions } from "./chart/useChartOptions";
 import style from "./style.module.css";
 import { ModalFeatures } from "./ModalFeatures";
 import { TrackAnalysisProp } from "../type";
+import { UseLoading } from "../../../../hooks/useLoading";
 
 export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
   dataTrackFeature: {
@@ -59,16 +58,7 @@ export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
   return (
     <Card sx={{ height: "100%" }} className={style.cardAnalysis}>
       {loadingFeatures ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "64.5vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
-        </Box>
+        <UseLoading height="67vh" size={100} />
       ) : (
         <>
           <CardHeader title="Análisis del Track" />

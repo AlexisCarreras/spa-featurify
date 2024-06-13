@@ -39,10 +39,10 @@ export const TrackName: React.FunctionComponent<CardDetailTracksProps> = ({
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
-            height: "5vh",
+            height: "13vh",
           }}
         >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
+          <CircularProgress sx={{ color: "#4E36F5" }} size={70} />
         </Box>
       ) : (
         <CardContent>
