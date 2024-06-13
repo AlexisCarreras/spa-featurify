@@ -24,12 +24,15 @@ import style from "./style.module.css";
 import { Track } from "../type";
 import { getAllFavoritesService } from "../../../../services/Favorites/GetAllTracks/getAllFavoritesService";
 import { deleteFavoriteTrackService } from "../../../../services/Favorites/DeleteTracks/deleteFavoriteTrackService";
+import { useNavigate } from "react-router-dom";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
 };
 
 export const TableFavorites: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+
   const [tracks, setTracks] = useState<Track[]>([]);
   const [refreshFavorites, setRefreshFavorites] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -90,6 +93,11 @@ export const TableFavorites: React.FunctionComponent = () => {
     "Favorito",
     "Obtener Análisis",
   ];
+
+  const handleGetAnalysis = (trackId: string) => {
+    localStorage.setItem("selectedTrackId", trackId);
+    navigate("/audio-analisis");
+  };
 
   return (
     <Card className={style.card}>
@@ -156,6 +164,7 @@ export const TableFavorites: React.FunctionComponent = () => {
                   </TableCell>
                   <TableCell>
                     <Button
+                      onClick={() => handleGetAnalysis(track.idTrack)}
                       variant="outlined"
                       startIcon={<Leaderboard />}
                       className={style.button}

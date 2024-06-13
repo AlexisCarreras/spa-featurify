@@ -25,6 +25,7 @@ import { useformatDuration } from "../../../../hooks/useFormatDuration";
 import { deleteFavoriteTrackService } from "../../../../services/Favorites/DeleteTracks/deleteFavoriteTrackService";
 import { addFavoriteTrackService } from "../../../../services/Favorites/AddTracks/addFavoriteTrackService";
 import { GetAllFavoritesTrack } from "../../../../services/Favorites/GetAllTracks/type";
+import { useNavigate } from "react-router-dom";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
@@ -35,6 +36,8 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
   favorites,
   setFavorites,
 }) => {
+  const navigate = useNavigate();
+
   const [localTracks, setLocalTracks] = useState<Track[]>([]);
   const [loadingAvatars, setLoadingAvatars] = useState<{
     [key: string]: boolean;
@@ -153,6 +156,11 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
     "Obtener Análisis",
   ];
 
+  const handleGetAnalysis = (trackId: string) => {
+    localStorage.setItem("selectedTrackId", trackId);
+    navigate("/audio-analisis");
+  };
+
   return (
     <Card className={style.card}>
       <Box sx={{ overflowX: "auto" }}>
@@ -243,6 +251,7 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
                 <TableCell>
                   <Button
                     variant="outlined"
+                    onClick={() => handleGetAnalysis(track.idTrack)}
                     startIcon={<Leaderboard />}
                     className={style.button}
                   >

@@ -27,6 +27,7 @@ import { getAllFavoritesService } from "../../../../services/Favorites/GetAllTra
 import { deleteFavoriteTrackService } from "../../../../services/Favorites/DeleteTracks/deleteFavoriteTrackService";
 import { addFavoriteTrackService } from "../../../../services/Favorites/AddTracks/addFavoriteTrackService";
 import { Album, Artist } from "../type";
+import { useNavigate } from "react-router-dom";
 
 interface Track {
   idTrack: string;
@@ -44,6 +45,8 @@ const TransitionSlide = (props: any) => {
 };
 
 export const TableRecomendations: React.FunctionComponent = () => {
+  const navigate = useNavigate();
+
   const [tracks, setTracks] = useState<Track[]>([]);
   const [localTracks, setLocalTracks] = useState<Track[]>([]);
   const [favorites, setFavorites] = useState<GetAllFavoritesTrack[]>([]);
@@ -189,6 +192,11 @@ export const TableRecomendations: React.FunctionComponent = () => {
     "Obtener Análisis",
   ];
 
+  const handleGetAnalysis = (trackId: string) => {
+    localStorage.setItem("selectedTrackId", trackId);
+    navigate("/audio-analisis");
+  };
+
   return (
     <Card className={style.card}>
       <Box sx={{ overflowX: "auto" }}>
@@ -269,6 +277,7 @@ export const TableRecomendations: React.FunctionComponent = () => {
                   </TableCell>
                   <TableCell>
                     <Button
+                      onClick={() => handleGetAnalysis(track.idTrack)}
                       variant="outlined"
                       startIcon={<Leaderboard />}
                       className={style.button}
