@@ -12,10 +12,20 @@ import style from "./style.module.css";
 import "./stylesMUI.css";
 
 import { TrackAddFavoritesProps } from "./type";
+import { playTrackService } from "../../../../../services/Tracks/playTrack/playTrackService";
 
 export const TrackAddFavorites: React.FunctionComponent<
   TrackAddFavoritesProps
-> = () => {
+> = ({ trackId }) => {
+  const handlePlayTrack = async () => {
+    try {
+      if (trackId === null) return;
+      await playTrackService(trackId);
+    } catch (error) {
+      console.error("Failed to play track", error);
+    }
+  };
+
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
       <CardContent>
@@ -40,7 +50,7 @@ export const TrackAddFavorites: React.FunctionComponent<
                 Abrir en Spotify
               </Typography>
               <Tooltip title="Reproducir en Spotify" placement="left-start">
-                <IconButton aria-label="play">
+                <IconButton aria-label="play" onClick={handlePlayTrack}>
                   <PlayCircle sx={{ fontSize: 50, color: "#1ED760" }} />
                 </IconButton>
               </Tooltip>

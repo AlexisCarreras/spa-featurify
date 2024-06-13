@@ -16,6 +16,8 @@ export const AudioAnalisis: React.FunctionComponent = () => {
   const { durationMs, loudness, tempo, timeSignature, key, mode } =
     dataTrackFeature;
 
+  const selectedTrackId = localStorage.getItem("selectedTrackId");
+
   return (
     <Stack className={style.searchContainer} spacing={3}>
       <Grid container spacing={3}>
@@ -31,7 +33,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
-          <TrackAddFavorites />
+          <TrackAddFavorites trackId={selectedTrackId} />
         </Grid>
         <Grid lg={3} sm={6} xs={12} className={style.gridCardDetails}>
           <TrackPreview url="https://p.scdn.co/mp3-preview/4e165954262eec8ac03d4a5c17f15a0f1bac808d?cid=c0da54e4db61472d91c890564e176f07" />
