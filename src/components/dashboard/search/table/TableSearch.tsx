@@ -93,7 +93,6 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
         setFavorites(updatedFavorites);
 
         if (isMounted.current) {
-          console.log("SnackBar should open: Track quitado de favoritos");
           setSnackBar({
             open: true,
             text: "Track quitado de favoritos",
@@ -124,7 +123,6 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
         setFavorites(updatedFavorites);
 
         if (isMounted.current) {
-          console.log("SnackBar should open: Track añadido a favoritos");
           setSnackBar({
             open: true,
             text: "Track añadido a favoritos",

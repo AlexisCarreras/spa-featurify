@@ -3,6 +3,7 @@ import {
   CardContent,
   CardHeader,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 import {
@@ -11,23 +12,35 @@ import {
   QueueMusicOutlined,
 } from "@mui/icons-material";
 import style from "./style.module.css";
-import { dataAlbumDetails } from "./mock/dataAlbumDetails";
+import { AlbumDetailsProps } from "./type";
+import { truncateText } from "../../../../hooks/useTruncateText";
+import { capitalizeFirstLetter } from "../../../../hooks/useCapitalizeFirstLetter";
 
-export const AlbumDetails: React.FunctionComponent = () => {
-  const { nameAlbum, typeAlbum, totalTracks, releaseDate, images } =
-    dataAlbumDetails;
+export const AlbumDetails: React.FunctionComponent<AlbumDetailsProps> = ({
+  album,
+}) => {
+  const { idAlbum, images, nameAlbum, releaseDate, totalTracks, typeAlbum } =
+    album;
 
   // Encuentra la imagen más adecuada (por ejemplo, la de mayor resolución)
   const albumCover = images.length > 0 ? images[0].url : "";
 
-  function capitalizeFirstLetter(texto: string) {
-    if (!texto) return texto;
-    return texto.charAt(0).toUpperCase() + texto.slice(1);
-  }
+  const name = truncateText(nameAlbum, 30);
+  const showNameTooltip = nameAlbum.length > 30;
 
   return (
-    <Card sx={{ height: "100%" }} className={style.cardAlbumDetails}>
-      <CardHeader title={nameAlbum} />
+    <Card
+      sx={{ height: "100%" }}
+      className={style.cardAlbumDetails}
+      key={idAlbum}
+    >
+      {showNameTooltip ? (
+        <Tooltip title={nameAlbum}>
+          <CardHeader title={name} />
+        </Tooltip>
+      ) : (
+        <CardHeader title={nameAlbum} />
+      )}
       <CardContent className={style.cardContentAlbum}>
         <Stack spacing={2}>
           <img src={albumCover} alt={nameAlbum} style={{ borderRadius: 8 }} />

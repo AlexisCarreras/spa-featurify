@@ -6,6 +6,7 @@ import {
   CircularProgress,
   LinearProgress,
   Stack,
+  Tooltip,
   Typography,
 } from "@mui/material";
 
@@ -16,17 +17,23 @@ import "./stylesMUI.css";
 
 import { CardDetailTracksProps } from "./type";
 import { useformatDuration } from "../../../../../hooks/useFormatDuration";
+import { truncateText } from "../../../../../hooks/useTruncateText";
 
 export const TrackName: React.FunctionComponent<CardDetailTracksProps> = ({
-  loading,
+  nameTrack,
   durationMs,
   loudness,
+  loadingFeatures,
+  loadingTrack,
 }) => {
   const normalizedLoudness = loudness ? ((loudness + 60) / 60) * 100 : 0;
 
+  const name = truncateText(nameTrack, 18);
+  const showNameTooltip = nameTrack.length > 18;
+
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
-      {loading ? (
+      {loadingFeatures && loadingTrack ? (
         <Box
           sx={{
             display: "flex",
@@ -47,7 +54,13 @@ export const TrackName: React.FunctionComponent<CardDetailTracksProps> = ({
             >
               <Stack spacing={1}>
                 <Typography className={style.title} variant="overline">
-                  La Razón Que Te Demora
+                  {showNameTooltip ? (
+                    <Tooltip title={nameTrack}>
+                      <span>{name}</span>
+                    </Tooltip>
+                  ) : (
+                    <span>{nameTrack}</span>
+                  )}
                 </Typography>
                 <Typography className={style.description} variant="h4">
                   {durationMs && useformatDuration(durationMs)}

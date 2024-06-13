@@ -1,5 +1,7 @@
 export interface CardDetailTracksProps {
-  loading: boolean;
+  nameTrack: string;
   durationMs: number;
   loudness: number;
+  loadingFeatures: boolean;
+  loadingTrack: boolean;
 }

@@ -1,6 +1,4 @@
-import { DataAlbumDetails } from "../type";
-
-export const dataAlbumDetails: DataAlbumDetails = {
+export const dataAlbumDetails = {
   idAlbum: "7hHY77bNkcPikVZpC91hvZ",
   type: "album",
   typeAlbum: "album",

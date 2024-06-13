@@ -27,7 +27,7 @@ export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
     liveness,
     valence,
   },
-  loading,
+  loadingFeatures,
 }) => {
   const chartOptions = useChartOptions();
 
@@ -58,7 +58,7 @@ export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
 
   return (
     <Card sx={{ height: "100%" }} className={style.cardAnalysis}>
-      {loading ? (
+      {loadingFeatures ? (
         <Box
           sx={{
             display: "flex",

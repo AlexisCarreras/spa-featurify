@@ -15,15 +15,12 @@ import style from "./style.module.css";
 import "./stylesMUI.css";
 
 import { AccountInfoProps } from "./type";
+import { capitalizeFirstLetter } from "../../../../hooks/useCapitalizeFirstLetter";
 
 export const AccountInfo: React.FunctionComponent<AccountInfoProps> = ({
   userData,
   loading,
 }) => {
-  function capitalizeFirstLetter(texto: string | null | undefined) {
-    if (!texto) return "";
-    return texto.charAt(0).toUpperCase() + texto.slice(1);
-  }
 
   return (
     <Card className={style.card}>

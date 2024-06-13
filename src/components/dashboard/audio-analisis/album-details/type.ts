@@ -4,7 +4,7 @@ export interface AlbumImage {
   width: number;
 }
 
-export interface DataAlbumDetails {
+export interface Album {
   idAlbum: string;
   type: string;
   typeAlbum: string;
@@ -12,4 +12,8 @@ export interface DataAlbumDetails {
   totalTracks: number;
   releaseDate: string;
   images: AlbumImage[];
+}
+
+export interface AlbumDetailsProps {
+  album: Album;
 }

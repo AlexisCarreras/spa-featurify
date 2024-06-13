@@ -16,12 +16,13 @@ import "./stylesMUI.css";
 import { CardDetailTracksProps } from "./type";
 
 export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
-  loading,
   tempo,
   timeSignature,
   typeNote,
   mode,
+  loadingFeatures,
 }) => {
+
   const timeSignatureDescriptions: { [key: number]: string } = {
     3: "3/4",
     4: "4/4",
@@ -31,7 +32,7 @@ export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
   };
 
   const descriptionTimeSignature =
-    timeSignatureDescriptions[timeSignature] || "Tipo de compás desconocido";
+    timeSignatureDescriptions[timeSignature] || "Compás desconocido";
 
   const keyMap: { [key: number]: string } = {
     0: "C",
@@ -66,7 +67,7 @@ export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
 
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
-      {loading ? (
+      {loadingFeatures ? (
         <Box
           sx={{
             display: "flex",

@@ -21,10 +21,7 @@ import style from "./style.module.css";
 import "./stylesMUI.css";
 
 import { dataRecomendationsPreview } from "./mock/dataRecomendationsPreview";
-
-const truncateText = (text: string, maxLength: number) => {
-  return text.length > maxLength ? `${text.slice(0, maxLength)}...` : text;
-};
+import { truncateText } from "../../../../../hooks/useTruncateText";
 
 export const RecomendationsPreview: React.FunctionComponent = () => {
   return (

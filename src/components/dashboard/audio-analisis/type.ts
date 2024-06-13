@@ -17,5 +17,5 @@ export interface DataTrackFeature {
 
 export interface TrackAnalysisProp {
   dataTrackFeature: DataTrackFeature;
-  loading: boolean;
+  loadingFeatures: boolean;
 }
