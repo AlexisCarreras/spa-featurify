@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   Card,
+  CircularProgress,
   IconButton,
   Slide,
   Snackbar,
@@ -31,6 +32,7 @@ const TransitionSlide = (props: any) => {
 export const TableFavorites: React.FunctionComponent = () => {
   const [tracks, setTracks] = useState<Track[]>([]);
   const [refreshFavorites, setRefreshFavorites] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [snackBar, setSnackBar] = useState({
     open: false,
     text: "",
@@ -41,6 +43,7 @@ export const TableFavorites: React.FunctionComponent = () => {
       try {
         const updatedFavorites = await getAllFavoritesService();
         setTracks(updatedFavorites);
+        setLoading(false);
       } catch (error) {
         console.error("Error al obtener los favoritos:", error);
       } finally {
@@ -91,64 +94,80 @@ export const TableFavorites: React.FunctionComponent = () => {
   return (
     <Card className={style.card}>
       <Box sx={{ overflowX: "auto" }}>
-        <Table sx={{ minWidth: "800px" }}>
-          <TableHead className={style.tableHead}>
-            <TableRow>
-              {dataTable.map((item: string, index) => (
-                <TableCell key={index} className={style.tableCellHeader}>
-                  {item}
-                </TableCell>
-              ))}
-            </TableRow>
-          </TableHead>
-          <TableBody>
-            {tracks.map((track: Track) => (
-              <TableRow key={track.idTrack} hover>
-                <TableCell>
-                  <Stack
-                    sx={{ alignItems: "center" }}
-                    direction="row"
-                    spacing={2}
-                  >
-                    <Avatar src={track.album.images[0].url} />
-                    <Typography
-                      variant="subtitle2"
-                      className={style.tableCellDataPrimary}
-                    >
-                      {track.nameTrack}
-                    </Typography>
-                  </Stack>
-                </TableCell>
-                <TableCell className={style.tableCellDataSecondary}>
-                  {track.artist.map((artist) => artist.nameArtist).join(", ")}
-                </TableCell>
-                <TableCell className={style.tableCellDataSecondary}>
-                  {track.album.nameAlbum}
-                </TableCell>
-                <TableCell>
-                  <IconButton
-                    color="primary"
-                    aria-label="remove from favorites"
-                    onClick={() => toggleFavorite(track.idTrack)}
-                  >
-                    <Tooltip title="Quitar de Favoritos" placement="left-start">
-                      <Favorite className={style.icon} />
-                    </Tooltip>
-                  </IconButton>
-                </TableCell>
-                <TableCell>
-                  <Button
-                    variant="outlined"
-                    startIcon={<Leaderboard />}
-                    className={style.button}
-                  >
-                    Ver Análisis
-                  </Button>
-                </TableCell>
+        {loading ? (
+          <Box
+            sx={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+              height: "37vh",
+            }}
+          >
+            <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
+          </Box>
+        ) : (
+          <Table sx={{ minWidth: "800px" }}>
+            <TableHead className={style.tableHead}>
+              <TableRow>
+                {dataTable.map((item: string, index) => (
+                  <TableCell key={index} className={style.tableCellHeader}>
+                    {item}
+                  </TableCell>
+                ))}
               </TableRow>
-            ))}
-          </TableBody>
-        </Table>
+            </TableHead>
+            <TableBody>
+              {tracks.map((track: Track) => (
+                <TableRow key={track.idTrack} hover>
+                  <TableCell>
+                    <Stack
+                      sx={{ alignItems: "center" }}
+                      direction="row"
+                      spacing={2}
+                    >
+                      <Avatar src={track.album.images[0].url} />
+                      <Typography
+                        variant="subtitle2"
+                        className={style.tableCellDataPrimary}
+                      >
+                        {track.nameTrack}
+                      </Typography>
+                    </Stack>
+                  </TableCell>
+                  <TableCell className={style.tableCellDataSecondary}>
+                    {track.artist.map((artist) => artist.nameArtist).join(", ")}
+                  </TableCell>
+                  <TableCell className={style.tableCellDataSecondary}>
+                    {track.album.nameAlbum}
+                  </TableCell>
+                  <TableCell>
+                    <IconButton
+                      color="primary"
+                      aria-label="remove from favorites"
+                      onClick={() => toggleFavorite(track.idTrack)}
+                    >
+                      <Tooltip
+                        title="Quitar de Favoritos"
+                        placement="left-start"
+                      >
+                        <Favorite className={style.icon} />
+                      </Tooltip>
+                    </IconButton>
+                  </TableCell>
+                  <TableCell>
+                    <Button
+                      variant="outlined"
+                      startIcon={<Leaderboard />}
+                      className={style.button}
+                    >
+                      Ver Análisis
+                    </Button>
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        )}
         <Snackbar
           open={snackBar.open}
           autoHideDuration={3000}

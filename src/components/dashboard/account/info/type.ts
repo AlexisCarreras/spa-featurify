@@ -1,5 +1,7 @@
-import { DataUser } from "../../../../app/dashboard/account/type";
+import { User } from "../../../../services/User/getUser/type";
 
 export interface AccountInfoProps {
-  userData: DataUser;
+  userData: User;
+  loading: boolean;
 }
+ 

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -13,13 +13,28 @@ import {
 import { Logout, Person } from "@mui/icons-material";
 
 import styles from "./styles.module.css";
-
-import "./stylesMUI.css";
 import { Link } from "react-router-dom";
+import { User } from "../../../services/User/getUser/type";
+import { getUser } from "../../../services/User/getUser/getUser";
 
 export const AvatarUser = () => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const [user, setUser] = useState<User | null>(null);
+
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userData = await getUser();
+        setUser(userData);
+      } catch (error) {
+        console.error("Error fetching user:", error);
+      }
+    };
+
+    fetchUser();
+  }, []);
 
   const handleClick = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget);
@@ -41,7 +56,11 @@ export const AvatarUser = () => {
             aria-haspopup="true"
             aria-expanded={open ? "true" : undefined}
           >
-            <Avatar src="https://scontent-iad3-2.xx.fbcdn.net/v/t39.30808-1/441398891_10225283301693785_1703430363880467182_n.jpg?stp=dst-jpg_s320x320&_nc_cat=105&ccb=1-7&_nc_sid=5f2048&_nc_ohc=LD_Z1XoihwwQ7kNvgGOtC8Q&_nc_ht=scontent-iad3-2.xx&edm=AP4hL3IEAAAA&oh=00_AYB6HhDwzG-lrEx9dn4KsdyfsSSR4bKnGsH0_lhkYa7vww&oe=666A3E85" />
+            {user?.images && user.images.length > 0 ? (
+              <Avatar src={user.images[0].url} />
+            ) : (
+              <Avatar />
+            )}
           </IconButton>
         </Tooltip>
       </Box>
@@ -56,19 +75,20 @@ export const AvatarUser = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <div className={styles.containerDataUser}>
-          <Typography className={styles.nameUser} variant="h6">
-            Alexis Carreras
-          </Typography>
-          <Typography className={styles.emailUser} variant="subtitle2">
-            alexiscarreras@hotmail.com
-          </Typography>
+          {user && (
+            <>
+              <Typography className={styles.nameUser} variant="h6">
+                {user.displayName}
+              </Typography>
+              <Typography className={styles.emailUser} variant="subtitle2">
+                {user.emailUser}
+              </Typography>
+            </>
+          )}
         </div>
         <Divider className={styles.divider} />
         <Link to="/account">
-          <MenuItem
-            className={styles.itemIcon}
-            onClick={handleClose}
-          >
+          <MenuItem className={styles.itemIcon} onClick={handleClose}>
             <ListItemIcon>
               <Person fontSize="small" />
             </ListItemIcon>
