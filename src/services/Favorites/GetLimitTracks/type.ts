@@ -18,7 +18,7 @@ export interface Artist {
   _id: string;
 }
 
-export interface Favorite {
+export interface Track {
   _id: string;
   album: Album;
   artist: Artist[];
@@ -26,8 +26,3 @@ export interface Favorite {
   nameTrack: string;
   __v: number;
 }
-
-export type DataFavoritesLimit = {
-  flagTrackId: boolean;
-  setFlagTrackId: (flagTrackId: boolean) => void;
-};

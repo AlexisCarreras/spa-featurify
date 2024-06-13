@@ -30,6 +30,9 @@ export const AudioAnalisis: React.FunctionComponent = () => {
   const [loadingTrack, setLoadingTrack] = useState<boolean>(true);
   const [errorTrack, setErrorTrack] = useState<string | null>(null);
 
+  // Flag para renderizar nuevamente el audio analisis
+  const [flagTrackId, setFlagTrackId] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchAudioFeatures = async () => {
       try {
@@ -44,7 +47,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
     };
 
     fetchAudioFeatures();
-  }, []);
+  }, [flagTrackId]);
 
   useEffect(() => {
     const fetchTrack = async () => {
@@ -60,7 +63,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
     };
 
     fetchTrack();
-  }, []);
+  }, [flagTrackId]);
 
   const { durationMs, loudness, tempo, timeSignature, key, mode } =
     audioFeatures;
@@ -133,7 +136,10 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           )}
         </Grid>
         <Grid lg={4} md={6} xs={12} className={style.gridCardFavorites}>
-          <FavoritesPreview />
+          <FavoritesPreview
+            flagTrackId={flagTrackId}
+            setFlagTrackId={setFlagTrackId}
+          />
         </Grid>
         <Grid lg={8} md={12} xs={12} className={style.gridCardRecomendations}>
           <Card
