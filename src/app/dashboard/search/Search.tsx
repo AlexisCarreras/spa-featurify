@@ -3,7 +3,6 @@ import {
   Alert,
   Box,
   Chip,
-  CircularProgress,
   Stack,
   Typography,
 } from "@mui/material";
@@ -19,6 +18,7 @@ import style from "./style.module.css";
 import "./stylesMUI.css";
 import { getAllFavoritesService } from "../../../services/Favorites/GetAllTracks/getAllFavoritesService";
 import { GetAllFavoritesTrack } from "../../../services/Favorites/GetAllTracks/type";
+import { UseLoading } from "../../../hooks/UseLoading";
 
 export const Search = () => {
   const [query, setQuery] = useState("");
@@ -76,16 +76,7 @@ export const Search = () => {
       <SearchFilter query={query} setQuery={setQuery} onSearch={handleSearch} />
       {error && <Alert severity="error">{error}</Alert>}
       {loading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "37vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
-        </Box>
+        <UseLoading height="37vh" size={100} />
       ) : (
         showTable && (
           <Box>

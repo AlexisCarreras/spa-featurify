@@ -1,12 +1,10 @@
 import React from "react";
 import {
-  Box,
   Button,
   Card,
   CardActions,
   CardContent,
   CardHeader,
-  CircularProgress,
   Divider,
   FormControl,
   Grid,
@@ -16,6 +14,7 @@ import {
 
 import style from "./style.module.css";
 import { AccountDetailsProps } from "./type";
+import { UseLoading } from "../../../../hooks/UseLoading";
 
 export const AccountDetailsForm: React.FunctionComponent<
   AccountDetailsProps
@@ -28,16 +27,7 @@ export const AccountDetailsForm: React.FunctionComponent<
     >
       <Card className={style.card}>
         {loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "46vh",
-            }}
-          >
-            <CircularProgress sx={{ color: "#4E36F5" }} size={80} />
-          </Box>
+          <UseLoading height="46vh" size={80} />
         ) : (
           <>
             <CardHeader

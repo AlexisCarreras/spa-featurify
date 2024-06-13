@@ -3,7 +3,6 @@ import {
   Box,
   Card,
   CardContent,
-  CircularProgress,
   Stack,
   Typography,
 } from "@mui/material";
@@ -19,6 +18,7 @@ import {
   getModeDescription,
   timeSignatureDescriptions,
 } from "./utils";
+import { UseLoading } from "../../../../../hooks/UseLoading";
 
 export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
   tempo,
@@ -36,16 +36,7 @@ export const TrackFeature: React.FunctionComponent<CardDetailTracksProps> = ({
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
       {loadingFeatures ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "13vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={70} />
-        </Box>
+        <UseLoading height="13vh" size={70} />
       ) : (
         <CardContent>
           <Stack spacing={3}>

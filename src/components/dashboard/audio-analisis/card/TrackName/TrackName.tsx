@@ -3,7 +3,6 @@ import {
   Box,
   Card,
   CardContent,
-  CircularProgress,
   LinearProgress,
   Stack,
   Tooltip,
@@ -18,6 +17,7 @@ import "./stylesMUI.css";
 import { CardDetailTracksProps } from "./type";
 import { useformatDuration } from "../../../../../hooks/useFormatDuration";
 import { truncateText } from "../../../../../hooks/useTruncateText";
+import { UseLoading } from "../../../../../hooks/UseLoading";
 
 export const TrackName: React.FunctionComponent<CardDetailTracksProps> = ({
   nameTrack,
@@ -34,16 +34,7 @@ export const TrackName: React.FunctionComponent<CardDetailTracksProps> = ({
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
       {loadingFeatures && loadingTrack ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "13vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={70} />
-        </Box>
+        <UseLoading height="13vh" size={70} />
       ) : (
         <CardContent>
           <Stack spacing={3}>

@@ -1,11 +1,9 @@
 import {
   Avatar,
-  Box,
   Button,
   Card,
   CardActions,
   CardContent,
-  CircularProgress,
   Divider,
   Stack,
   Typography,
@@ -16,25 +14,16 @@ import "./stylesMUI.css";
 
 import { AccountInfoProps } from "./type";
 import { capitalizeFirstLetter } from "../../../../hooks/useCapitalizeFirstLetter";
+import { UseLoading } from "../../../../hooks/UseLoading";
 
 export const AccountInfo: React.FunctionComponent<AccountInfoProps> = ({
   userData,
   loading,
 }) => {
-
   return (
     <Card className={style.card}>
       {loading ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "29vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={80} />
-        </Box>
+        <UseLoading height="29vh" size={80} />
       ) : (
         <>
           <CardContent>

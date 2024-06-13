@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Card,
-  CircularProgress,
   IconButton,
   Slide,
   Snackbar,
@@ -25,6 +24,7 @@ import { Track } from "../type";
 import { getAllFavoritesService } from "../../../../services/Favorites/GetAllTracks/getAllFavoritesService";
 import { deleteFavoriteTrackService } from "../../../../services/Favorites/DeleteTracks/deleteFavoriteTrackService";
 import { useNavigate } from "react-router-dom";
+import { UseLoading } from "../../../../hooks/UseLoading";
 
 const TransitionSlide = (props: any) => {
   return <Slide {...props} direction="left" />;
@@ -103,16 +103,7 @@ export const TableFavorites: React.FunctionComponent = () => {
     <Card className={style.card}>
       <Box sx={{ overflowX: "auto" }}>
         {loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "37vh",
-            }}
-          >
-            <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
-          </Box>
+          <UseLoading height="37vh" size={100} />
         ) : (
           <Table sx={{ minWidth: "800px" }}>
             <TableHead className={style.tableHead}>

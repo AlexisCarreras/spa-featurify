@@ -4,7 +4,6 @@ import {
   Box,
   Button,
   Card,
-  CircularProgress,
   IconButton,
   Slide,
   Snackbar,
@@ -28,6 +27,7 @@ import { deleteFavoriteTrackService } from "../../../../services/Favorites/Delet
 import { addFavoriteTrackService } from "../../../../services/Favorites/AddTracks/addFavoriteTrackService";
 import { Album, Artist } from "../type";
 import { useNavigate } from "react-router-dom";
+import { UseLoading } from "../../../../hooks/UseLoading";
 
 interface Track {
   idTrack: string;
@@ -201,16 +201,7 @@ export const TableRecomendations: React.FunctionComponent = () => {
     <Card className={style.card}>
       <Box sx={{ overflowX: "auto" }}>
         {loading ? (
-          <Box
-            sx={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              height: "37vh",
-            }}
-          >
-            <CircularProgress sx={{ color: "#4E36F5" }} size={100} />
-          </Box>
+          <UseLoading height="37vh" size={100} />
         ) : (
           <Table sx={{ minWidth: "800px" }}>
             <TableHead className={style.tableHead}>

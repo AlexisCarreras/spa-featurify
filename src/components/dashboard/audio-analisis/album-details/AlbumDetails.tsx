@@ -15,7 +15,7 @@ import style from "./style.module.css";
 import { AlbumDetailsProps } from "./type";
 import { truncateText } from "../../../../hooks/useTruncateText";
 import { capitalizeFirstLetter } from "../../../../hooks/useCapitalizeFirstLetter";
-import { UseLoading } from "../../../../hooks/useLoading";
+import { UseLoading } from "../../../../hooks/UseLoading";
 
 export const AlbumDetails: React.FunctionComponent<AlbumDetailsProps> = ({
   album,
@@ -47,7 +47,7 @@ export const AlbumDetails: React.FunctionComponent<AlbumDetailsProps> = ({
       key={idAlbum}
     >
       {loadingTrack ? (
-        <UseLoading height="67vh" size={100} />
+        <UseLoading height="64.5vh" size={100} />
       ) : (
         <>
           {renderCardHeader()}

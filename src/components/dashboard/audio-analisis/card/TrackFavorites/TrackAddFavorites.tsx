@@ -1,8 +1,6 @@
 import {
-  Box,
   Card,
   CardContent,
-  CircularProgress,
   IconButton,
   Stack,
   Tooltip,
@@ -15,6 +13,7 @@ import "./stylesMUI.css";
 
 import { TrackAddFavoritesProps } from "./type";
 import { playTrackService } from "../../../../../services/Tracks/playTrack/playTrackService";
+import { UseLoading } from "../../../../../hooks/UseLoading";
 
 export const TrackAddFavorites: React.FunctionComponent<
   TrackAddFavoritesProps
@@ -31,16 +30,7 @@ export const TrackAddFavorites: React.FunctionComponent<
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
       {loadingTrack ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "13vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={70} />
-        </Box>
+        <UseLoading height="13vh" size={70} />
       ) : (
         <CardContent>
           <Stack spacing={3}>

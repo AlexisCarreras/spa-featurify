@@ -8,7 +8,6 @@ import {
   Stack,
   Box,
   Typography,
-  CircularProgress,
 } from "@mui/material";
 import {
   PlayArrowRounded,
@@ -22,6 +21,7 @@ import {
 import style from "./style.module.css";
 import "./stylesMUI.css";
 import { AudioPlayerProps } from "./type";
+import { UseLoading } from "../../../../../hooks/UseLoading";
 
 const formatDuration = (value: number) => {
   const minute = Math.floor(value / 60);
@@ -66,16 +66,7 @@ export const TrackPreview: React.FunctionComponent<AudioPlayerProps> = ({
   return (
     <Card sx={{ height: "100%" }} className={style.card}>
       {loadingTrack ? (
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            height: "13vh",
-          }}
-        >
-          <CircularProgress sx={{ color: "#4E36F5" }} size={70} />
-        </Box>
+        <UseLoading height="13vh" size={70} />
       ) : (
         <CardContent>
           <Box

@@ -14,7 +14,7 @@ import { useChartOptions } from "./chart/useChartOptions";
 import style from "./style.module.css";
 import { ModalFeatures } from "./ModalFeatures";
 import { TrackAnalysisProp } from "../type";
-import { UseLoading } from "../../../../hooks/useLoading";
+import { UseLoading } from "../../../../hooks/UseLoading";
 
 export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
   dataTrackFeature: {
@@ -58,7 +58,7 @@ export const TrackAnalysis: React.FunctionComponent<TrackAnalysisProp> = ({
   return (
     <Card sx={{ height: "100%" }} className={style.cardAnalysis}>
       {loadingFeatures ? (
-        <UseLoading height="67vh" size={100} />
+        <UseLoading height="64.5vh" size={100} />
       ) : (
         <>
           <CardHeader title="Análisis del Track" />
