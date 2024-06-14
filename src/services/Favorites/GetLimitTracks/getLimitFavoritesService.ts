@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Track } from "./type";
 
-const BASE_URL = "http://localhost:8080";
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL;
 
 interface GetLimitTrackFavoritesParams {
   limit: number;
@@ -12,7 +12,7 @@ export const getLimitTrackFavorites = async ({
 }: GetLimitTrackFavoritesParams): Promise<Track[]> => {
   try {
     const response = await axios.get<Track[]>(
-      `${BASE_URL}/favorites/getLimitTracks`,
+      `${API_BASE_URL}/favorites/getLimitTracks`,
       {
         params: { limit },
       }
