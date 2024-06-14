@@ -36,7 +36,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
           keepMounted: true,
         }}
         sx={{
-          display: { xs: "block", sm: "none" },
+          display: { xs: "block", sm: "none", backgroundColor: "#121621" },
           "& .MuiDrawer-paper": {
             boxSizing: "border-box",
             width: drawerWidth,
