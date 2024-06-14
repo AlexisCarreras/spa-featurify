@@ -23,7 +23,7 @@ export const SideBar: React.FunctionComponent<SideBarProps> = ({
   return (
     <Box
       component="nav"
-      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+      sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 }, backgroundColor: "#121621" }}
       aria-label="mailbox folders"
     >
       <Drawer
