@@ -1,17 +1,75 @@
+.gridInputs {
+  background-color: #090a0b !important;
+}
+
+.logo {
+  color: #4e36f5 !important;
+  margin-top: 5rem;
+
+}
+
+.containerTextLogo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-top: 5.5rem;
+}
+
+.nameLogo {
+  color: #ffff !important;
+  margin: 0 !important;
+  font-family: Inter !important;
+  font-size: 3rem !important;
+  font-weight: 700 !important;
+  line-height: 28px !important;
+  margin-left: 12px !important;
+  display: flex;
+  align-items: center;
+  user-select: none;
+}
+
+.descriptionLogo {
+  user-select: none;
+  color: #afafaf !important;
+  margin: 0 !important;
+  font-family: Inter !important;
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  line-height: 28px !important;
+  margin-left: 12px !important;
+  display: flex !important;
+  align-items: start !important;
+}
+
+.title {
+  margin: 0px !important;
+  font-family: Inter, sans-serif;
+  font-weight: 500 !important;
+  font-size: 1.5rem !important;
+  line-height: 1.2 !important;
+  color: #f0f4f8 !important;
+  margin-top: 10rem !important;
+  margin-bottom: 1rem !important;
+}
+
 .button {
-    background-color: #635bff !important;
-    text-transform: none !important;
-    box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.08) !important;
-    border-radius: 12px !important;
-    padding: 12px 20px !important;
-    font-family: Inter !important;
-    font-weight: 500 !important;
-    font-size: 0.875rem !important;
-    line-height: 1.75 !important;
-    margin-left: 1rem !important;
-  }
-  
-  .button:hover {
-    background-color: #4e36f5 !important;
-    box-shadow: 0px 5px 5px rgba(0, 0, 0, 0.08) !important;
-  }
+  border-radius: 8px !important;
+  margin: 0px !important;
+  text-decoration: none !important;
+  padding: 6px 15px !important;
+  font-size: 0.875rem !important;
+  line-height: 28px !important;
+  text-transform: none !important;
+  color: #dde7ee !important;
+  font-family: Inter !important;
+  font-weight: 500 !important;
+  background-color: transparent !important;
+  border: 1px solid #32383e !important;
+  box-shadow: #00000014 0px 1px 2px 0px !important;
+  transition: background-color 0.3s ease-in-out !important;
+  width: 63.5% !important;
+}
+
+.button:hover {
+  background-color: #191b1d !important;
+}

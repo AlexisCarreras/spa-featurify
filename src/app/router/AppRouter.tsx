@@ -1,4 +1,4 @@
-import Login from "../auth/Login";
+import { SignIn } from "../auth/SingIn";
 import { Account } from "../dashboard/account/Account";
 import { AudioAnalisis } from "../dashboard/audio-analisis/AudioAnalisis";
 import { Favorites } from "../dashboard/favorites/Favorites";
@@ -13,7 +13,7 @@ export const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: "/",
-      element: <Login />,
+      element: <SignIn />,
     },
     {
       path: "/search",
