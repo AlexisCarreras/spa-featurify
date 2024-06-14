@@ -1,66 +1,49 @@
 import * as React from "react";
-import { Album, CheckCircle } from "@mui/icons-material";
-import Button from "@mui/material/Button";
-import CssBaseline from "@mui/material/CssBaseline";
-import Link from "@mui/material/Link";
-import Paper from "@mui/material/Paper";
-import Box from "@mui/material/Box";
-import Grid from "@mui/material/Grid";
-import Typography from "@mui/material/Typography";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { Alert, Toolbar } from "@mui/material";
+import { Album } from "@mui/icons-material";
 
+import {
+  Button,
+  CssBaseline,
+  Paper,
+  Box,
+  Grid,
+  Typography,
+  Toolbar,
+} from "@mui/material";
+
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import { AlertInfo } from "./AlertInfo";
+
+import { loginService } from "../../services/Auth/login/loginService";
+
+import { useLocation, useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 
 const defaultTheme = createTheme();
 
-function CustomCheckIcon(props: any) {
-  return (
-    <CheckCircle
-      sx={{
-        color: "#ffbb1f",
-        fontSize: "inherit",
-        verticalAlign: "middle",
-        marginRight: "5px",
-      }}
-      {...props}
-    />
-  );
-}
-
-function AlertInfo() {
-  return (
-    <ThemeProvider theme={defaultTheme}>
-      <Alert
-        severity="success"
-        iconMapping={{ success: <CustomCheckIcon /> }}
-        style={{
-          backgroundColor: "#191407",
-          color: "rgb(255, 236, 182)",
-          marginLeft: "8.5rem",
-          marginRight: "8.5rem",
-          borderRadius: "8px",
-        }}
-      >
-        {"Esta app funciona con la API de "}
-        <Link color="inherit" href="https://developer.spotify.com/">
-          https://developer.spotify.com/
-        </Link>
-        {"."}
-      </Alert>
-    </ThemeProvider>
-  );
-}
-
 export const SignIn: React.FunctionComponent = () => {
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  const handleLogin = () => {
+    loginService();
   };
+
+  React.useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const accessToken = queryParams.get("access_token");
+    const refreshToken = queryParams.get("refresh_token");
+    const expiresIn = queryParams.get("expires_in");
+
+    if (accessToken && refreshToken && expiresIn) {
+      sessionStorage.setItem("access_token", accessToken);
+      sessionStorage.setItem("refresh_token", refreshToken);
+      sessionStorage.setItem("expires_in", expiresIn);
+
+      navigate("/search");
+    } else {
+    }
+  }, [location, navigate]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
@@ -118,22 +101,17 @@ export const SignIn: React.FunctionComponent = () => {
           <Button
             variant="contained"
             className={style.button}
-            //   onClick={handleSpotifyLogin}
+            onClick={handleLogin}
           >
             Continue with Spotify
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
               alt="Spotify Logo"
               height="20px"
-              style={{ marginLeft: "10px" }} // Cambiado a marginLeft
+              style={{ marginLeft: "10px" }}
             />
           </Button>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 10, width: "100%" }}
-          >
+          <Box component="form" noValidate sx={{ mt: 10, width: "63.5%" }}>
             <AlertInfo />
           </Box>
         </Grid>
