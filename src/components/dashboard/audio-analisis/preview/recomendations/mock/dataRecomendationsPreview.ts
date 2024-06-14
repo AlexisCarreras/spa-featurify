@@ -1,6 +1,4 @@
-import { DataRecomendationsPreview } from "../type";
-
-export const dataRecomendationsPreview: DataRecomendationsPreview = {
+export const dataRecomendationsPreview: any = {
   tracks: [
     {
       album: {

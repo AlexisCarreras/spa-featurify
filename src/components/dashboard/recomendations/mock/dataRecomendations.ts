@@ -1,6 +1,4 @@
-import { DataRecommendations } from "../type";
-
-export const dataRecomendations: DataRecommendations = [
+export const dataRecomendations: any[] = [
   {
     tracks: [
       {

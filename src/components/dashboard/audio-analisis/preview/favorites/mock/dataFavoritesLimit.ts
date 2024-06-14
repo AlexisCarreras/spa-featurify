@@ -1,6 +1,4 @@
-import { DataFavoritesLimit } from "../type";
-
-export const dataFavoritesLimit: DataFavoritesLimit = [
+export const dataFavoritesLimit: any[] = [
   {
     _id: "665f774dcdd401184e927479",
     album: {
