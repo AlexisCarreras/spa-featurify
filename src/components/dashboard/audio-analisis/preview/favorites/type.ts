@@ -30,4 +30,5 @@ export interface Favorite {
 export type DataFavoritesLimit = {
   flagTrackId: boolean;
   setFlagTrackId: (flagTrackId: boolean) => void;
+  flagTrackFavorite: boolean;
 };

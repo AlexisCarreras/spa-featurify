@@ -33,6 +33,9 @@ export const AudioAnalisis: React.FunctionComponent = () => {
   // Flag para renderizar nuevamente el audio analisis
   const [flagTrackId, setFlagTrackId] = useState<boolean>(false);
 
+  // Flag para renderizar favoritos en audio analisis
+  const [flagTrackFavorite, setFlagTrackFavorite] = useState<boolean>(false);
+
   useEffect(() => {
     const fetchAudioFeatures = async () => {
       try {
@@ -108,6 +111,9 @@ export const AudioAnalisis: React.FunctionComponent = () => {
             <TrackAddFavorites
               trackId={selectedTrackId}
               loadingTrack={loadingTrack}
+              track={track}
+              flagTrackFavorite={flagTrackFavorite}
+              setFlagTrackFavorite={setFlagTrackFavorite}
             />
           )}
         </Grid>
@@ -139,6 +145,7 @@ export const AudioAnalisis: React.FunctionComponent = () => {
           <FavoritesPreview
             flagTrackId={flagTrackId}
             setFlagTrackId={setFlagTrackId}
+            flagTrackFavorite={flagTrackFavorite}
           />
         </Grid>
         <Grid lg={8} md={12} xs={12} className={style.gridCardRecomendations}>

@@ -28,6 +28,7 @@ import { DataFavoritesLimit } from "./type";
 export const FavoritesPreview: React.FunctionComponent<DataFavoritesLimit> = ({
   flagTrackId,
   setFlagTrackId,
+  flagTrackFavorite
 }) => {
   const navigate = useNavigate();
 
@@ -51,7 +52,7 @@ export const FavoritesPreview: React.FunctionComponent<DataFavoritesLimit> = ({
     };
 
     fetchTracks();
-  }, [flagTrackId]);
+  }, [flagTrackId, flagTrackFavorite]);
 
   const handleGetAnalysis = (trackId: string) => {
     localStorage.setItem("selectedTrackId", trackId);
