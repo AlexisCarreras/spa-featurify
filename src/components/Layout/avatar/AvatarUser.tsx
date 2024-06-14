@@ -13,11 +13,13 @@ import {
 import { Logout, Person } from "@mui/icons-material";
 
 import styles from "./styles.module.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { User } from "../../../services/User/getUser/type";
 import { getUser } from "../../../services/User/getUser/getUser";
 
 export const AvatarUser = () => {
+  const navigate = useNavigate();
+
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const [user, setUser] = useState<User | null>(null);
 
@@ -42,6 +44,14 @@ export const AvatarUser = () => {
 
   const handleClose = () => {
     setAnchorEl(null);
+  };
+
+  const handleSignOut = () => {
+    sessionStorage.removeItem("access_token");
+    sessionStorage.removeItem("refresh_token");
+    sessionStorage.removeItem("expires_in");
+
+    navigate("/");
   };
 
   return (
@@ -95,7 +105,7 @@ export const AvatarUser = () => {
             Perfil
           </MenuItem>
         </Link>
-        <MenuItem className={styles.itemIcon} onClick={handleClose}>
+        <MenuItem className={styles.itemIcon} onClick={handleSignOut}>
           <ListItemIcon>
             <Logout fontSize="small" />
           </ListItemIcon>

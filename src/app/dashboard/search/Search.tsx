@@ -1,11 +1,5 @@
 import { useState, useEffect } from "react";
-import {
-  Alert,
-  Box,
-  Chip,
-  Stack,
-  Typography,
-} from "@mui/material";
+import { Alert, Box, Chip, Stack, Typography } from "@mui/material";
 import { SearchFilter } from "../../../components/dashboard/search/filter/SearchFilter";
 import { TableSearch } from "../../../components/dashboard/search/table/TableSearch";
 
@@ -14,6 +8,8 @@ import { features } from "./utils";
 import { Track } from "./type";
 import { searchTracks } from "../../../services/Tracks/searchTrack/searchTrackService";
 
+import { useLocation, useNavigate } from "react-router-dom";
+
 import style from "./style.module.css";
 import "./stylesMUI.css";
 import { getAllFavoritesService } from "../../../services/Favorites/GetAllTracks/getAllFavoritesService";
@@ -21,6 +17,31 @@ import { GetAllFavoritesTrack } from "../../../services/Favorites/GetAllTracks/t
 import { UseLoading } from "../../../hooks/UseLoading";
 
 export const Search = () => {
+  // Datos de INICIO DE SESION
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const accessToken = queryParams.get("access_token");
+    const refreshToken = queryParams.get("refresh_token");
+    const expiresIn = queryParams.get("expires_in");
+
+    if (accessToken && refreshToken && expiresIn) {
+      sessionStorage.setItem("access_token", accessToken);
+      sessionStorage.setItem("refresh_token", refreshToken);
+      sessionStorage.setItem("expires_in", expiresIn);
+
+      // Limpiar los parámetros de la URL
+      navigate("/search", { replace: true });
+    } else {
+      const storedAccessToken = sessionStorage.getItem("access_token");
+      if (!storedAccessToken) {
+        navigate("/");
+      }
+    }
+  }, [location, navigate]);
+
   const [query, setQuery] = useState("");
   const [tracks, setTracks] = useState<Track[]>([]);
   const [loading, setLoading] = useState(false);

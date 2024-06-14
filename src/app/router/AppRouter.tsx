@@ -8,6 +8,7 @@ import { PageNotFound } from "../error/PageNotFound";
 import { MainLayout } from "../layout/MainLayout";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
 
 export const AppRouter = () => {
   const router = createBrowserRouter([
@@ -26,33 +27,49 @@ export const AppRouter = () => {
     {
       path: "/audio-analisis",
       element: (
-        <MainLayout>
-          <AudioAnalisis />
-        </MainLayout>
+        <PrivateRoute
+          element={
+            <MainLayout>
+              <AudioAnalisis />
+            </MainLayout>
+          }
+        />
       ),
     },
     {
       path: "/favorites",
       element: (
-        <MainLayout>
-          <Favorites />
-        </MainLayout>
+        <PrivateRoute
+          element={
+            <MainLayout>
+              <Favorites />
+            </MainLayout>
+          }
+        />
       ),
     },
     {
       path: "/recomendations",
       element: (
-        <MainLayout>
-          <Recomendations />
-        </MainLayout>
+        <PrivateRoute
+          element={
+            <MainLayout>
+              <Recomendations />
+            </MainLayout>
+          }
+        />
       ),
     },
     {
       path: "/account",
       element: (
-        <MainLayout>
-          <Account />
-        </MainLayout>
+        <PrivateRoute
+          element={
+            <MainLayout>
+              <Account />
+            </MainLayout>
+          }
+        />
       ),
     },
     {

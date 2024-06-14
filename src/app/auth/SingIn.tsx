@@ -1,4 +1,3 @@
-import * as React from "react";
 import { Album } from "@mui/icons-material";
 
 import {
@@ -16,34 +15,14 @@ import { AlertInfo } from "./AlertInfo";
 
 import { loginService } from "../../services/Auth/login/loginService";
 
-import { useLocation, useNavigate } from "react-router-dom";
 import style from "./style.module.css";
 
 const defaultTheme = createTheme();
 
 export const SignIn: React.FunctionComponent = () => {
-  const location = useLocation();
-  const navigate = useNavigate();
-
   const handleLogin = () => {
     loginService();
   };
-
-  React.useEffect(() => {
-    const queryParams = new URLSearchParams(location.search);
-    const accessToken = queryParams.get("access_token");
-    const refreshToken = queryParams.get("refresh_token");
-    const expiresIn = queryParams.get("expires_in");
-
-    if (accessToken && refreshToken && expiresIn) {
-      sessionStorage.setItem("access_token", accessToken);
-      sessionStorage.setItem("refresh_token", refreshToken);
-      sessionStorage.setItem("expires_in", expiresIn);
-
-      navigate("/search");
-    } else {
-    }
-  }, [location, navigate]);
 
   return (
     <ThemeProvider theme={defaultTheme}>
