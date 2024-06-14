@@ -1,3 +1,4 @@
+import Login from "../auth/Login";
 import { Account } from "../dashboard/account/Account";
 import { AudioAnalisis } from "../dashboard/audio-analisis/AudioAnalisis";
 import { Favorites } from "../dashboard/favorites/Favorites";
@@ -12,6 +13,10 @@ export const AppRouter = () => {
   const router = createBrowserRouter([
     {
       path: "/",
+      element: <Login />,
+    },
+    {
+      path: "/search",
       element: (
         <MainLayout>
           <Search />

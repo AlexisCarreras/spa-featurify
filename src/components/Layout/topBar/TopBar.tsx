@@ -39,7 +39,7 @@ export const TopBar: React.FunctionComponent<TopBarProps> = ({
         >
           <MenuIcon />
         </IconButton>
-        {location.pathname === "/" ? (
+        {location.pathname === "/search" ? (
           <SearchIcon className={styles.searchIcon} />
         ) : location.pathname === "/audio-analisis" ? (
           <TroubleshootIcon className={styles.searchIcon} />

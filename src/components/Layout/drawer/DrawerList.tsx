@@ -31,7 +31,7 @@ export const DrawerList = () => {
   });
 
   useEffect(() => {
-    if (location.pathname === "/") {
+    if (location.pathname === "/search") {
       setLinkActive({ search: true, favorites: false, account: false });
     } else if (location.pathname === "/favorites") {
       setLinkActive({ search: false, favorites: true, account: false });
@@ -60,7 +60,7 @@ export const DrawerList = () => {
             linkActive.search ? styles.listItemActive : styles.listItem
           }
         >
-          <NavLink to="/" className={styles.navLink}>
+          <NavLink to="/search" className={styles.navLink}>
             <ListItemButton>
               <ListItemIcon className={styles.containerIcon}>
                 <Troubleshoot

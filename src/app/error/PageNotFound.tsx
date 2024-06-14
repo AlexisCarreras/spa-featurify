@@ -46,7 +46,7 @@ export const PageNotFound: React.FunctionComponent = () => {
           La ruta ingresada no es válida para esta aplicación. Por favor,
           regrese al Inicio.
         </Typography>
-        <Link to="/">
+        <Link to="/search">
           <Button variant="contained" className={styles.button}>
             Volver al Inicio
           </Button>
