@@ -143,16 +143,12 @@ export const TableRecomendations: React.FunctionComponent = () => {
   };
 
   const toggleFavorite = async (trackId: string, isFavorite?: boolean) => {
-    if (!isMounted.current) return;
-
     try {
       if (isFavorite) {
         const favorite = favorites.find((fav) => fav.idTrack === trackId);
         if (!favorite) return;
 
         await deleteFavoriteTrackService(favorite._id);
-
-        if (!isMounted.current) return;
 
         setLocalTracks((prevTracks) =>
           prevTracks.map((track) =>
@@ -164,24 +160,31 @@ export const TableRecomendations: React.FunctionComponent = () => {
         );
         setFavorites(updatedFavorites);
 
-        if (isMounted.current) {
-          setSnackBar({
-            open: true,
-            text: "Track quitado de favoritos",
-          });
-        }
+        setSnackBar({
+          open: true,
+          text: "Track quitado de favoritos",
+        });
       } else {
         const newFavorite = tracks.find((track) => track.idTrack === trackId);
         if (!newFavorite) return;
 
         const addedFavorite = await addFavoriteTrackService({
-          album: newFavorite.album,
-          artist: newFavorite.artists,
+          album: {
+            idAlbum: newFavorite.album.idAlbum,
+            nameAlbum: newFavorite.album.nameAlbum,
+            images: newFavorite.album.images.map((image) => ({
+              url: image.url,
+              height: image.height,
+              width: image.width,
+            })),
+          },
+          artist: newFavorite.artists.map((artist) => ({
+            idArtist: artist.idArtist,
+            nameArtist: artist.nameArtist,
+          })),
           idTrack: newFavorite.idTrack,
           nameTrack: newFavorite.nameTrack,
         });
-
-        if (!isMounted.current) return;
 
         setLocalTracks((prevTracks) =>
           prevTracks.map((track) =>
@@ -192,12 +195,10 @@ export const TableRecomendations: React.FunctionComponent = () => {
         const updatedFavorites = [...favorites, addedFavorite];
         setFavorites(updatedFavorites);
 
-        if (isMounted.current) {
-          setSnackBar({
-            open: true,
-            text: "Track añadido a favoritos",
-          });
-        }
+        setSnackBar({
+          open: true,
+          text: "Track añadido a favoritos",
+        });
       }
     } catch (error) {
       console.error(

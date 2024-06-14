@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   Avatar,
   Box,
@@ -56,14 +56,13 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
     );
   }, [tracks, favorites]);
 
-  const isMounted = useRef(true);
-  useEffect(() => {
-    return () => {
-      isMounted.current = false;
-    };
-  }, []);
-
-  const handleCloseSnackBar = () => {
+  const handleCloseSnackBar = (
+    _?: React.SyntheticEvent | Event,
+    reason?: string
+  ) => {
+    if (reason === "clickaway") {
+      return;
+    }
     setSnackBar({
       ...snackBar,
       open: false,
@@ -71,16 +70,17 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
   };
 
   const toggleFavorite = async (trackId: string, isFavorite?: boolean) => {
-    if (!isMounted.current) return;
-
     try {
       if (isFavorite) {
         const favorite = favorites.find((fav) => fav.idTrack === trackId);
         if (!favorite) return;
 
         await deleteFavoriteTrackService(favorite._id);
-
-        if (!isMounted.current) return;
+        
+        setSnackBar({
+          open: true,
+          text: "Track quitado de favoritos",
+        });
 
         setLocalTracks((prevTracks) =>
           prevTracks.map((track) =>
@@ -91,13 +91,6 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
           (fav: GetAllFavoritesTrack) => fav._id !== favorite._id
         );
         setFavorites(updatedFavorites);
-
-        if (isMounted.current) {
-          setSnackBar({
-            open: true,
-            text: "Track quitado de favoritos",
-          });
-        }
       } else {
         const newFavorite = localTracks.find(
           (track) => track.idTrack === trackId
@@ -111,8 +104,6 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
           nameTrack: newFavorite.nameTrack,
         });
 
-        if (!isMounted.current) return;
-
         setLocalTracks((prevTracks) =>
           prevTracks.map((track) =>
             track.idTrack === trackId ? { ...track, isFavorite: true } : track
@@ -122,26 +113,22 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
         const updatedFavorites = [...favorites, addedFavorite];
         setFavorites(updatedFavorites);
 
-        if (isMounted.current) {
-          setSnackBar({
-            open: true,
-            text: "Track añadido a favoritos",
-          });
-        }
+        setSnackBar({
+          open: true,
+          text: "Track añadido a favoritos",
+        });
       }
     } catch (error) {
       console.error(
         `Error al ${isFavorite ? "quitar" : "añadir"} el track de favoritos`,
         error
       );
-      if (isMounted.current) {
-        setSnackBar({
-          open: true,
-          text: `Error al ${
-            isFavorite ? "quitar" : "añadir"
-          } el track de favoritos`,
-        });
-      }
+      setSnackBar({
+        open: true,
+        text: `Error al ${
+          isFavorite ? "quitar" : "añadir"
+        } el track de favoritos`,
+      });
     }
   };
 
@@ -265,7 +252,7 @@ export const TableSearch: React.FunctionComponent<TableSearchProps> = ({
           autoHideDuration={2000}
           onClose={handleCloseSnackBar}
           message={snackBar.text}
-          anchorOrigin={{ vertical: "bottom", horizontal: "center" }}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
           TransitionComponent={TransitionSlide}
         />
       </Box>
