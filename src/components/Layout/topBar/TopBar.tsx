@@ -1,5 +1,13 @@
-import { AppBar, Divider, IconButton, Toolbar, Tooltip } from "@mui/material";
-import { Search as SearchIcon, Menu as MenuIcon } from "@mui/icons-material";
+import { AppBar, Divider, IconButton, Toolbar } from "@mui/material";
+import {
+  Search as SearchIcon,
+  Menu as MenuIcon,
+  Troubleshoot as TroubleshootIcon,
+  Favorite as FavoriteIcon,
+  Recommend as RecommendIcon,
+  ManageAccounts as ManageAccountsIcon,
+} from "@mui/icons-material";
+import { useLocation } from "react-router-dom";
 
 import styles from "./styles.module.css";
 import { TopBarProps } from "./type";
@@ -9,6 +17,8 @@ export const TopBar: React.FunctionComponent<TopBarProps> = ({
   handleDrawerToggle,
   drawerWidth,
 }) => {
+  const location = useLocation();
+
   return (
     <AppBar
       position="fixed"
@@ -29,12 +39,19 @@ export const TopBar: React.FunctionComponent<TopBarProps> = ({
         >
           <MenuIcon />
         </IconButton>
-        <Tooltip title="Buscar Track">
-          <IconButton edge="start">
-            <SearchIcon className={styles.searchIcon} />
-          </IconButton>
-        </Tooltip>
-
+        {location.pathname === "/" ? (
+          <SearchIcon className={styles.searchIcon} />
+        ) : location.pathname === "/audio-analisis" ? (
+          <TroubleshootIcon className={styles.searchIcon} />
+        ) : location.pathname === "/favorites" ? (
+          <FavoriteIcon className={styles.searchIcon} />
+        ) : location.pathname === "/recomendations" ? (
+          <RecommendIcon className={styles.searchIcon} />
+        ) : location.pathname === "/account" ? (
+          <ManageAccountsIcon className={styles.searchIcon} />
+        ) : (
+          <></>
+        )}
         <AvatarUser />
       </Toolbar>
       <Divider />
